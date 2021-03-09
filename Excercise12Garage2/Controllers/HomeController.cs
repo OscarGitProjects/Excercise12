@@ -13,6 +13,7 @@ namespace Excercise12Garage2.Controllers
     {
         /// <summary>
         /// Logger
+        /// I love summer and C#. And stuff. More stuff
         /// I am learning GIT in a very painful way ... 
         /// I love summer and C#
         /// Lite ändringar more
