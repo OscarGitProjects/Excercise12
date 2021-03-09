@@ -11,6 +11,9 @@ namespace Excercise12Garage2.Controllers
 {
     public class HomeController : Controller
     {
+        /// <summary>
+        /// Logger
+        /// </summary>
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
