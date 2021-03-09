@@ -13,6 +13,7 @@ namespace Excercise12Garage2.Controllers
     {
         /// <summary>
         /// Logger
+        /// I love summer and C#
         /// </summary>
         private readonly ILogger<HomeController> _logger;
 
