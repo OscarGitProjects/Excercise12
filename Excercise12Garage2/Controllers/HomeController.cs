@@ -13,7 +13,7 @@ namespace Excercise12Garage2.Controllers
     {
         /// <summary>
         /// Logger
-        /// Lite ändringar
+        /// Lite ändringar more
         /// </summary>
         private readonly ILogger<HomeController> _logger;
 
