@@ -21,6 +21,8 @@ namespace Excercise12Garage2.Controllers
         public IActionResult Index()
         {
             return View();
+
+            // need to create a ViewModel to return view.
         }
 
         public IActionResult Privacy()
