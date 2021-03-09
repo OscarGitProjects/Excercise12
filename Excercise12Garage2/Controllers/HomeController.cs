@@ -33,6 +33,7 @@ namespace Excercise12Garage2.Controllers
         public IActionResult Privacy()
         {
             return View();
+            // need to create a ViewModel to return view. bla bla
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
