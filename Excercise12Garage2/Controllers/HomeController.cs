@@ -13,7 +13,7 @@ namespace Excercise12Garage2.Controllers
     {
         /// <summary>
         /// Logger
-        /// I love summer and C#
+        /// I am learning GIT in a very painful way ... 
         /// </summary>
         private readonly ILogger<HomeController> _logger;
 
