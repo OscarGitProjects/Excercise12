@@ -13,6 +13,7 @@ namespace Excercise12Garage2.Controllers
     {
         /// <summary>
         /// Logger
+        /// Logger change in my oscar bransch
         /// </summary>
         private readonly ILogger<HomeController> _logger;
 
