@@ -46,7 +46,7 @@ namespace Excercise12Garage2.Controllers
         }
 
         // GET: Vehicles/Create
-        public IActionResult Create()
+        public IActionResult ParkNewCar()
         {
             return View();
         }
@@ -55,7 +55,7 @@ namespace Excercise12Garage2.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,VehicleType,RegNum,Color,Make,Model,NumOfWheels,TimeOfArrival")] VehicleEditViewModel newVehicle)
+        public async Task<IActionResult> ParkNewCar([Bind("id,VehicleType,RegNum,Color,Make,Model,NumOfWheels,TimeOfArrival")] VehicleEditViewModel newVehicle)
         {
             if (ModelState.IsValid)
             {
