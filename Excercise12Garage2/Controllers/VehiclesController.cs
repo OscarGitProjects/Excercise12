@@ -60,16 +60,16 @@ namespace Excercise12Garage2.Controllers
             if (ModelState.IsValid)
             {
                 //Create new Vehicle
-                Vehicle vehicle = new Vehicle();
+                ParkedVehicle vehicle = new ParkedVehicle();
 
                 vehicle.Id = newVehicle.Id;
                 vehicle.VehicleType = newVehicle.VehicleType;
-                vehicle.RegNum = newVehicle.RegNum;
+                vehicle.RegistrationNumber = newVehicle.RegNum;
                 vehicle.Color = newVehicle.Color;
                 vehicle.Make = newVehicle.Make;
                 vehicle.Model = newVehicle.Model;
-                vehicle.NumOfWheels = newVehicle.NumOfWheels;
-                vehicle.TimeOfArrival = newVehicle.TimeOfArrival;
+                vehicle.NumberOfWheels = newVehicle.NumOfWheels;
+                vehicle.CheckIn = newVehicle.TimeOfArrival;
 
                 _dbGarage.Add(vehicle);
                 await _dbGarage.SaveChangesAsync();
@@ -99,7 +99,7 @@ namespace Excercise12Garage2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,VehicleType,RegNum,Color,Make,Model,NumOfWheels,TimeOfArrival")] Vehicle vehicle)
+        public async Task<IActionResult> Edit(int id, [Bind("id,VehicleType,RegNum,Color,Make,Model,NumOfWheels,TimeOfArrival")] ParkedVehicle vehicle)
         {
             if (id != vehicle.Id)
             {

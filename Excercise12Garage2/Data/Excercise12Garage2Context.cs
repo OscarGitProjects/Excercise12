@@ -14,6 +14,6 @@ namespace Excercise12Garage2.Data
         {
         }
 
-        public DbSet<Excercise12Garage2.Models.Vehicle> Vehicle { get; set; }
+        public DbSet<Excercise12Garage2.Models.ParkedVehicle> Vehicle { get; set; }
     }
 }

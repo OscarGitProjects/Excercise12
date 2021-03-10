@@ -1,4 +1,4 @@
-﻿@model Excercise12Garage2.Models.Vehicle
+﻿@model Excercise12Garage2.Models.ParkedVehicle
 
 @{
     ViewData["Title"] = "Details";
@@ -17,10 +17,10 @@
             @Html.DisplayFor(model => model.VehicleType)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.RegNum)
+            @Html.DisplayNameFor(model => model.RegistrationNumber)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.RegNum)
+            @Html.DisplayFor(model => model.RegistrationNumber)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Color)
@@ -41,16 +41,16 @@
             @Html.DisplayFor(model => model.Model)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NumOfWheels)
+            @Html.DisplayNameFor(model => model.NumberOfWheels)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NumOfWheels)
+            @Html.DisplayFor(model => model.NumberOfWheels)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TimeOfArrival)
+            @Html.DisplayNameFor(model => model.CheckIn)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TimeOfArrival)
+            @Html.DisplayFor(model => model.CheckIn)
         </dd>
     </dl>
 </div>
