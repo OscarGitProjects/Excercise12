@@ -1,4 +1,5 @@
 ﻿using Excercise12Garage2.Models.ViewModels;
+using Excercise12Garage2.Utils;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -28,14 +29,60 @@ namespace Excercise12Garage2.Controllers
             return lsVehicles;
         }
 
-
         [HttpGet]
-        public ActionResult SearchFor(string txtSearchRegistrationNumber)
+        public ActionResult Sort(string sortBy, string sortOrder, string txtSearchRegistrationNumber)
         {
             List<VehicleViewModel> lsVehicles = GetVehicles(10);
 
+            if (String.IsNullOrWhiteSpace(sortOrder))
+                sortOrder = "asc";
+
             if (!String.IsNullOrWhiteSpace(txtSearchRegistrationNumber))
+            {
+                txtSearchRegistrationNumber = txtSearchRegistrationNumber.Trim();
+                ViewBag.SearchFor = txtSearchRegistrationNumber;
+                lsVehicles = lsVehicles.Where(r => r.RegistrationNumber.Equals(txtSearchRegistrationNumber, StringComparison.OrdinalIgnoreCase)).ToList();            
+            }
+
+            // Sort list with vehicle
+            lsVehicles = VehicleHelper.Sort(lsVehicles, sortBy, sortOrder);
+
+            // Now set up sortOrder for next postback
+            if (sortOrder.Equals("desc"))
+                sortOrder = "asc";
+            else
+                sortOrder = "desc";
+
+
+            // Set ViewBags
+            ViewBag.SortOrder = sortOrder;
+            ViewBag.OldSortBy = sortBy;
+
+            return View("Index", lsVehicles);
+        }
+
+        [HttpGet]
+        public ActionResult SearchFor(string sortOrder, string oldSortBy, string txtSearchRegistrationNumber)
+        {
+            List<VehicleViewModel> lsVehicles = GetVehicles(10);
+
+            if (String.IsNullOrWhiteSpace(sortOrder))
+                sortOrder = "asc";
+
+            if (!String.IsNullOrWhiteSpace(txtSearchRegistrationNumber))
+            {
+                txtSearchRegistrationNumber = txtSearchRegistrationNumber.Trim();
+                ViewBag.SearchFor = txtSearchRegistrationNumber;
                 lsVehicles = lsVehicles.Where(r => r.RegistrationNumber.Equals(txtSearchRegistrationNumber, StringComparison.OrdinalIgnoreCase)).ToList();
+            }
+
+            // Sort list with vehicle
+            lsVehicles = VehicleHelper.Sort(lsVehicles, oldSortBy, sortOrder);
+
+
+            // Set ViewBags
+            ViewBag.SortOrder = sortOrder;
+            ViewBag.OldSortBy = oldSortBy;
 
             return View("Index", lsVehicles);
         }
@@ -44,7 +91,19 @@ namespace Excercise12Garage2.Controllers
         // GET: VehicleController
         public ActionResult Index()
         {
+            string sortOrder = "asc";
+            string sortBy = "RegistrationNumber";
+
             List<VehicleViewModel> lsVehicles = GetVehicles(10);
+
+            // Sort list with vehicle
+            lsVehicles = VehicleHelper.Sort(lsVehicles, sortBy, sortOrder);
+
+
+            // Set ViewBags
+            ViewBag.SortOrder = sortOrder;
+            ViewBag.OldSortBy = sortBy;
+
             return View(lsVehicles);
         }
 
