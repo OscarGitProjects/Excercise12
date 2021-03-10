@@ -45,31 +45,39 @@ namespace Excercise12Garage2.Controllers
             return View(vehicle);
         }
 
-        // GET: Vehicles/Create
-        public IActionResult Create()
+        // GET: Vehicles/Park new vehicle
+        public IActionResult Park()
         {
-            return View();
+            var vTypes = GetVehicleTypes();
+            var model = new VehicleEditViewModel();
+            model.VehicleTypes = GetVehicleTypeOptions(vTypes);
+            return View(model);
         }
 
-        // POST: Vehicles/Create
+        
+        // POST: Vehicles/Parks new vehicle
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,VehicleType,RegNum,Color,Make,Model,NumOfWheels,TimeOfArrival")] VehicleEditViewModel newVehicle)
+        public async Task<IActionResult> Park([Bind("id,VehicleType,RegNum,Color,Make,Model,NumOfWheels,TimeOfArrival")] VehicleEditViewModel newVehicle)
         {
+           
+
+
             if (ModelState.IsValid)
             {
                 //Create new Vehicle
                 ParkedVehicle vehicle = new ParkedVehicle();
+                
 
                 vehicle.Id = newVehicle.Id;
                 vehicle.VehicleType = newVehicle.VehicleType;
-                vehicle.RegistrationNumber = newVehicle.RegNum;
+                vehicle.RegistrationNumber = newVehicle.RegistrationNumber;
                 vehicle.Color = newVehicle.Color;
                 vehicle.Make = newVehicle.Make;
                 vehicle.Model = newVehicle.Model;
-                vehicle.NumberOfWheels = newVehicle.NumOfWheels;
-                vehicle.CheckIn = newVehicle.TimeOfArrival;
+                vehicle.NumberOfWheels = newVehicle.NumberOfWheels;
+                vehicle.CheckIn = newVehicle.CheckIn;
 
                 _dbGarage.Add(vehicle);
                 await _dbGarage.SaveChangesAsync();
@@ -78,6 +86,36 @@ namespace Excercise12Garage2.Controllers
             return View(newVehicle);
         }
 
+        private  IEnumerable<string> GetVehicleTypes()
+        {
+             
+            return new List<string> 
+                { 
+                "Car",
+                "Boat",
+                "Motorcycle",
+                "Airplane",
+                "Bus",
+                "Truck",
+                "Sportscar",
+            };
+        }
+        
+        private IEnumerable<SelectListItem> GetVehicleTypeOptions(IEnumerable<string> elements)
+        {
+            var typeList = new List<SelectListItem>();
+            foreach(var element in elements)
+            {
+                typeList.Add(new SelectListItem
+                {
+                    Value = element,
+                    Text = element
+                });
+            }
+            return typeList;
+        }
+
+       
         // GET: Vehicles/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -130,7 +168,8 @@ namespace Excercise12Garage2.Controllers
         }
 
         // GET: Vehicles/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        //Take Vehicle out of Garage
+        public async Task<IActionResult> Remove(int? id)
         {
             if (id == null)
             {
@@ -148,9 +187,11 @@ namespace Excercise12Garage2.Controllers
         }
 
         // POST: Vehicles/Delete/5
-        [HttpPost, ActionName("Delete")]
+        // Confirm Vehicle out of Garage 
+        //TODO, add link to Receipt Page
+        [HttpPost, ActionName("Remove")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> RemoveConfirmed(int id)
         {
             var vehicle = await _dbGarage.Vehicle.FindAsync(id);
             _dbGarage.Vehicle.Remove(vehicle);

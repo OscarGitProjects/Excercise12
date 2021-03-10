@@ -25,7 +25,7 @@ namespace Excercise12Garage2.Data
                  new ParkedVehicle
                  {
                      Id = 1,
-                     VehicleType = "Sports Car",
+                     VehicleType = "Sportscar",
                      RegistrationNumber = "EKY 055",
                      Color = "Blue",
                      Make = "Koenigsegg",
@@ -36,7 +36,7 @@ namespace Excercise12Garage2.Data
                  new ParkedVehicle
                  {
                      Id = 2,
-                     VehicleType = "Trucks",
+                     VehicleType = "Truck",
                      RegistrationNumber = "KST 810",
                      Color = "silver",
                      Make = "Scania AB",
@@ -60,7 +60,7 @@ namespace Excercise12Garage2.Data
                  new ParkedVehicle
                  {
                      Id = 4,
-                     VehicleType = "Car",
+                     VehicleType = "Boat",
                      RegistrationNumber = "H 965",
                      Color = "Black",
                      Make = "SAAB",
@@ -72,7 +72,7 @@ namespace Excercise12Garage2.Data
                  new ParkedVehicle
                  {
                      Id = 5,
-                     VehicleType = "Motorcycles",
+                     VehicleType = "Motorcycle",
                      RegistrationNumber = "H 345",
                      Color = "Ash",
                      Make = "Husqvarna",
@@ -83,7 +83,7 @@ namespace Excercise12Garage2.Data
                  new ParkedVehicle
                  {
                      Id = 6,
-                     VehicleType = "Ship",
+                     VehicleType = "Boat",
                      RegistrationNumber = "IMO 8814275",
                      Color = "White",
                      Make = "SSPA Sweden AB",

@@ -1,22 +1,25 @@
-﻿@model Excercise12Garage2.Models.ParkedVehicle
+﻿@model Excercise12Garage2.Models.VehicleEditViewModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Park";
 }
 
-<h1>Create</h1>
+<h1>Park a New Car!</h1>
 
-<h4>Vehicle</h4>
+<h4>New Vehicle</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
+    <div class="col-md-4 col-sm-4">
+        <form asp-action="Park">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            @*Dropdown for Vehicle Type*@
             <div class="form-group">
-                <label asp-for="VehicleType" class="control-label"></label>
-                <input asp-for="VehicleType" class="form-control" />
-                <span asp-validation-for="VehicleType" class="text-danger"></span>
+                @Html.LabelFor(m => m.VehicleType)
+                @Html.DropDownListFor(model => Model.VehicleType, Model.VehicleTypes, "-Please Select Vehicle Type-")
+                
             </div>
+
             <div class="form-group">
                 <label asp-for="RegistrationNumber" class="control-label"></label>
                 <input asp-for="RegistrationNumber" class="form-control" />

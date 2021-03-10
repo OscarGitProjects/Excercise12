@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -25,9 +27,11 @@ namespace Excercise12Garage2.Models
             public int NumberOfWheels { get; set; }
             public DateTime CheckIn { get; set; }
 
+            [NotMapped]
+            public IEnumerable<SelectListItem> VehicleTypes { get; set; }
 
 
-        }
+    }
 
     
 }
