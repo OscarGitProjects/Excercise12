@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Excercise12Garage2.Data;
 
 namespace Excercise12Garage2
 {
@@ -24,6 +26,9 @@ namespace Excercise12Garage2
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddDbContext<Excercise12Garage2Context>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("Excercise12Garage2Context")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
