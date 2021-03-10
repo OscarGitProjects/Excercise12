@@ -25,9 +25,9 @@ namespace Excercise12Garage2.Utils
             if (days > 0)
             {
                 if(days > 1)
-                    strBuild.Append((int)days + " dagar");
+                    strBuild.Append((int)days + " days");
                 else
-                    strBuild.Append((int)days + " dag");
+                    strBuild.Append((int)days + " day");
 
                 dtResult = dtResult.Subtract(new TimeSpan((int)days, 0, 0, 0));
 
@@ -43,9 +43,9 @@ namespace Excercise12Garage2.Utils
                     strBuild.Append(", ");
 
                 if(hours > 1)
-                    strBuild.Append((int)hours + " timmar");
+                    strBuild.Append((int)hours + " hours");
                 else
-                    strBuild.Append((int)hours + " timme");
+                    strBuild.Append((int)hours + " hour");
 
                 dtResult = dtResult.Subtract(new TimeSpan(0, (int)hours, 0, 0));
 
@@ -60,9 +60,9 @@ namespace Excercise12Garage2.Utils
                     strBuild.Append(", ");
 
                 if(min > 1)
-                    strBuild.Append((int)min + " minuter");
+                    strBuild.Append((int)min + " minutes");
                 else
-                    strBuild.Append((int)min + " minut");
+                    strBuild.Append((int)min + " minute");
 
                 iAddedtoStringBuilder++;
             }
@@ -70,7 +70,7 @@ namespace Excercise12Garage2.Utils
 
             if(iAddedtoStringBuilder == 0)
             {
-                strBuild.Append("Nyligen parkerad");
+                strBuild.Append("Recently parked");
             }
 
             return strBuild.ToString();
