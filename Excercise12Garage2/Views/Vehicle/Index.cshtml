@@ -1,0 +1,85 @@
+﻿@model IEnumerable<Excercise12Garage2.Models.ViewModels.VehicleViewModel>
+
+@{
+    ViewData["Title"] = "Parked vehicles";
+}
+
+<h1>Parked vehicles</h1>
+
+<br/>
+
+<form asp-controller="Vehicle" asp-action="SearchFor" method="get">
+    <div class="form-group row">
+        <div class="col-md-6">
+            <div class="input-group">
+                <input type="text" class="form-control" id="txtSearchRegistrationNumber" name="txtSearchRegistrationNumber" placeholder="Search for Registrationnumber">
+                <button class="btn btn-primary" id="search" type="submit">Search</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<hr />
+
+<p>
+    <a asp-action="Create">Park vehicle</a>
+</p>
+
+@if (Model != null && Model.Count() > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Type)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RegistrationNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TimeOfArrivalAsString)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ParkedTime)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Type)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RegistrationNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TimeOfArrivalAsString)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ParkedTime)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                        @Html.ActionLink("Leave the garage", "Delete", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div>
+        <p>No vehicle</p>
+    </div>    
+}
+
+<hr />
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
