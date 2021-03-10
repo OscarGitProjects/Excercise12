@@ -20,13 +20,14 @@ namespace Excercise12Garage2.Controllers
         }
 
         // GET: Vehicles
-        // Index Page listing all Vehicles in Garage//
+        // Index Page listing all Vehicles in Garage
         public async Task<IActionResult> Index()
         {
             return View(await _dbGarage.Vehicle.ToListAsync());
         }
 
         // GET: Vehicles/Details/5
+        // Details Page for Vehicle Parked in Garage
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -35,7 +36,7 @@ namespace Excercise12Garage2.Controllers
             }
 
             var vehicle = await _dbGarage.Vehicle
-                .FirstOrDefaultAsync(m => m.id == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (vehicle == null)
             {
                 return NotFound();
@@ -51,19 +52,30 @@ namespace Excercise12Garage2.Controllers
         }
 
         // POST: Vehicles/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,VehicleType,RegNum,Color,Make,Model,NumOfWheels,TimeOfArrival")] Vehicle vehicle)
+        public async Task<IActionResult> Create([Bind("id,VehicleType,RegNum,Color,Make,Model,NumOfWheels,TimeOfArrival")] VehicleEditViewModel newVehicle)
         {
             if (ModelState.IsValid)
             {
+                //Create new Vehicle
+                Vehicle vehicle = new Vehicle();
+
+                vehicle.Id = newVehicle.Id;
+                vehicle.VehicleType = newVehicle.VehicleType;
+                vehicle.RegNum = newVehicle.RegNum;
+                vehicle.Color = newVehicle.Color;
+                vehicle.Make = newVehicle.Make;
+                vehicle.Model = newVehicle.Model;
+                vehicle.NumOfWheels = newVehicle.NumOfWheels;
+                vehicle.TimeOfArrival = newVehicle.TimeOfArrival;
+
                 _dbGarage.Add(vehicle);
                 await _dbGarage.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Details), new { id = vehicle.Id });
             }
-            return View(vehicle);
+            return View(newVehicle);
         }
 
         // GET: Vehicles/Edit/5
@@ -89,7 +101,7 @@ namespace Excercise12Garage2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("id,VehicleType,RegNum,Color,Make,Model,NumOfWheels,TimeOfArrival")] Vehicle vehicle)
         {
-            if (id != vehicle.id)
+            if (id != vehicle.Id)
             {
                 return NotFound();
             }
@@ -103,7 +115,7 @@ namespace Excercise12Garage2.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!VehicleExists(vehicle.id))
+                    if (!VehicleExists(vehicle.Id))
                     {
                         return NotFound();
                     }
@@ -126,7 +138,7 @@ namespace Excercise12Garage2.Controllers
             }
 
             var vehicle = await _dbGarage.Vehicle
-                .FirstOrDefaultAsync(m => m.id == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (vehicle == null)
             {
                 return NotFound();
@@ -148,7 +160,7 @@ namespace Excercise12Garage2.Controllers
 
         private bool VehicleExists(int id)
         {
-            return _dbGarage.Vehicle.Any(e => e.id == id);
+            return _dbGarage.Vehicle.Any(e => e.Id == id);
         }
     }
 }

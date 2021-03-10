@@ -5,7 +5,11 @@ using System.Threading.Tasks;
 
 namespace Excercise12Garage2.Models
 {
-    public class Vehicle
+
+    /// <summary>
+    /// A View Model Object to avoid Editing or Creating Vehicle Directly
+    /// </summary>
+    public class VehicleEditViewModel
     {
         public int Id { get; set; }
         public string VehicleType { get; set; }
