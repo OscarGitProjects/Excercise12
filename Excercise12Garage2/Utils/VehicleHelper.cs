@@ -159,15 +159,16 @@ namespace Excercise12Garage2.Utils
             return strBuild.ToString();
         }
 
-        internal static string CalculatePrice(DateTime dtParkedTime)
+        
+        internal static double CalculatePrice(DateTime dtParkedTime)
         {
             DateTime dtNow = DateTime.Now;
             TimeSpan dtResult = dtNow - dtParkedTime;
             var minutes = dtResult.TotalMinutes;
 
             int pricePerMinute = 3;
-            var price = Convert.ToString(minutes * pricePerMinute);
-            return price;
+            //var price = Convert.ToString(minutes * pricePerMinute);
+            return (double)(minutes * pricePerMinute);
         }
     }
 }

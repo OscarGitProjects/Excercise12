@@ -1,6 +1,7 @@
 ﻿using Excercise12Garage2.Utils;
 using System;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Excercise12Garage2.Models.ViewModels
 {
@@ -34,8 +35,9 @@ namespace Excercise12Garage2.Models.ViewModels
             }
         }
 
+        [DisplayFormat(DataFormatString = "{0:C}")]
         [DisplayName("Price")]
-        public string Price
+        public double Price
         {
             get
             {

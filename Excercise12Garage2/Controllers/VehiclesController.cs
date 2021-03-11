@@ -401,11 +401,11 @@ namespace Excercise12Garage2.Controllers
                 receipt.Type = vehicle.VehicleType;
             }
 
-            TempData["Reciept"] = JsonConvert.SerializeObject(receipt);
+            //TempData["Reciept"] = JsonConvert.SerializeObject(receipt);
 
             _dbGarage.Vehicle.Remove(vehicle);
             await _dbGarage.SaveChangesAsync();
-            return View("Receipt)", receipt);
+            return View("Receipt", receipt);
             //return RedirectToAction(nameof(Receipt));
         }
 

@@ -6,46 +6,42 @@
 
 <h1>Receipt</h1>
 
-<div class="container mt-0">
-    <h2> Receipt for @Model.RegistrationNumber</h2>
-    <div class="col-md-4">
-        <table>
-            <tr>
-                <td>
-                    <b>Arrivale time: </b>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    @Model.CheckIn
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <b>Total parking time: </b>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    @*Model.ParkedTime*@
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <b>Total cost: </b>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    @*@Model.Price*@
-                </td>
-            </tr>
-        </table>
-
-    </div>
-
+<div>
+    <h4>Vehicle</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RegistrationNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RegistrationNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TimeOfArrivalAsString)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TimeOfArrivalAsString)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ParkedTime)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ParkedTime)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+    </dl>
 </div>
-
 <div>
     <a asp-action="Index">Back to List</a>
 </div>

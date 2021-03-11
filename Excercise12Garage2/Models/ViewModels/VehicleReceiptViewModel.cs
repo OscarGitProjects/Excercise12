@@ -1,5 +1,7 @@
 ﻿using Excercise12Garage2.Utils;
 using System;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Excercise12Garage2.Models.ViewModels
 {
@@ -7,11 +9,14 @@ namespace Excercise12Garage2.Models.ViewModels
     public class VehicleReceiptViewModel
     {
         public int Id { get; set; }
+        [DisplayName("Registrationnumber")]
         public string RegistrationNumber{ get; set; }
+        [DisplayName("Type of vehicle")]
         public string Type { get; set; }
+        [DisplayName("Time of arrival")]
         public DateTime CheckIn { get; set; }
 
-        /*
+        [DisplayName("Parked time")]
         public string ParkedTime
         {
             get
@@ -20,12 +25,31 @@ namespace Excercise12Garage2.Models.ViewModels
             }
         }
 
-        public string Price
+
+        [DisplayName("Time of arrival")]
+        public string TimeOfArrivalAsString
+        {
+            get
+            {
+                return CheckIn.ToShortDateString() + " " + CheckIn.ToShortTimeString();
+            }
+        }
+
+        [DisplayFormat(DataFormatString = "{0:C}")]
+        [DisplayName("Price")]
+        public double Price
         {
             get
             {
                 return VehicleHelper.CalculatePrice(CheckIn);
             }
-        }*/
-    }
+        }
+    //public string Price
+    //{
+    //    get
+    //    {
+    //        return VehicleHelper.CalculatePrice(CheckIn);
+    //    }
+    //}
+}
 }

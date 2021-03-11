@@ -26,9 +26,9 @@ namespace Excercise12Garage2
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-
             services.AddDbContext<Excercise12Garage2Context>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("Excercise12Garage2Context")));
+                options.UseSqlServer(Configuration.GetConnectionString("Excercise12Garage2ContextHome")));
+            //options.UseSqlServer(Configuration.GetConnectionString("Excercise12Garage2Context")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
