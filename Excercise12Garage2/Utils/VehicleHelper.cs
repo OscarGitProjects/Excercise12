@@ -1,10 +1,93 @@
-﻿using System;
+﻿using Excercise12Garage2.Models.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Excercise12Garage2.Utils
 {
+    /// <summary>
+    /// Class with helper methods
+    /// </summary>
     public class VehicleHelper
     {
+        /// <summary>
+        /// Method sort list of vehicles by registrationsnumber
+        /// Sorting order decides by sortOrder
+        /// </summary>
+        /// <param name="lsVehicles">List of vehicles that we want to sort/order</param>
+        /// <param name="sortOrder">Sort order. Shall be asc or desc. defaul sorting will ve asc</param>
+        /// <returns>List of vehicles sorted by registrationnumber</returns>
+        public static List<VehicleViewModel> SortByRegistrationNumber(List<VehicleViewModel> lsVehicles, string sortOrder)
+        {
+            List<VehicleViewModel> lsSortedVehicles = lsVehicles;
+
+            if (lsVehicles != null && lsVehicles.Count > 1)
+            {
+                if (String.IsNullOrWhiteSpace(sortOrder))
+                    sortOrder = "asc";
+
+                if(sortOrder.Equals("desc"))                   
+                    lsSortedVehicles = lsVehicles.OrderByDescending(r => r.RegistrationNumber).ToList();
+                else
+                    lsSortedVehicles = lsVehicles.OrderBy(r => r.RegistrationNumber).ToList();
+            }
+
+            return lsSortedVehicles;
+        }
+
+
+        /// <summary>
+        /// Method sort list of vehicles by time of arrival
+        /// Sorting order decides by sortOrder
+        /// </summary>
+        /// <param name="lsVehicles">List of vehicles that we want to sort/order</param>
+        /// <param name="sortOrder">Sort order. Shall be asc or desc. defaul sorting will ve asc</param>
+        /// <returns>list of vehicles sorted by time of arrival</returns>
+        public static List<VehicleViewModel> SortByTimeOfArrival(List<VehicleViewModel> lsVehicles, string sortOrder)
+        {
+            List<VehicleViewModel> lsSortedVehicles = lsVehicles;
+
+            if (lsVehicles != null && lsVehicles.Count > 1)
+            {
+                if (String.IsNullOrWhiteSpace(sortOrder))
+                    sortOrder = "asc";
+
+                if (sortOrder.Equals("desc"))
+                    lsSortedVehicles = lsVehicles.OrderByDescending(r => r.TimeOfArrival).ToList();
+                else
+                    lsSortedVehicles = lsVehicles.OrderBy(r => r.TimeOfArrival).ToList();
+            }
+
+            return lsSortedVehicles;
+        }
+
+
+        /// <summary>
+        /// Method sort list of vehicles
+        /// What attribut we shall sort in decides by sortBy
+        /// Sorting order decides by sortOrder
+        /// </summary>
+        /// <param name="lsVehicles">List of vehicles that we want to sort/order</param>
+        /// <param name="sortBy">What attribut shall we sort on. Shall be RegistrationNumber or TimeOfArrival</param>
+        /// <param name="sortOrder">Sort order. Shall be asc or desc. defaul sorting will ve asc</param>               
+        /// <returns>List of sorted vehicles</returns>
+        public static List<VehicleViewModel> Sort(List<VehicleViewModel> lsVehicles, string sortBy, string sortOrder)
+        {
+            List<VehicleViewModel> lsSortedVehicles = lsVehicles;
+
+            if(!String.IsNullOrWhiteSpace(sortBy))
+            {
+                if (sortBy.Equals("RegistrationNumber"))
+                    lsSortedVehicles = SortByRegistrationNumber(lsVehicles, sortOrder);
+                else if (sortBy.Equals("TimeOfArrival"))
+                    lsSortedVehicles = SortByTimeOfArrival(lsVehicles, sortOrder);
+            }
+
+            return lsSortedVehicles;
+        }
+
+
         /// <summary>
         /// Method create a text with information about how long ago dtParkedTime
         /// </summary>
