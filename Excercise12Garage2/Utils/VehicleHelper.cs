@@ -75,5 +75,13 @@ namespace Excercise12Garage2.Utils
 
             return strBuild.ToString();
         }
+
+        internal static string CalculatePrice(string parkedTime)
+        {
+            int pTime = Convert.ToInt32(parkedTime);
+            int pricePerMinute = 3;
+            var price = Convert.ToString(pTime * pricePerMinute);
+            return price;
+        }
     }
 }

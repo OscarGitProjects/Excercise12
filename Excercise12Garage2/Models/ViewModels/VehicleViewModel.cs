@@ -32,6 +32,15 @@ namespace Excercise12Garage2.Models.ViewModels
             {
                 return VehicleHelper.CalculateParkedTime(TimeOfArrival);
             }
-        }        
+        }
+
+        [DisplayName("Price")]
+        public string Price
+        {
+            get
+            {
+                return VehicleHelper.CalculatePrice(ParkedTime);
+            }
+        }
     }
 }

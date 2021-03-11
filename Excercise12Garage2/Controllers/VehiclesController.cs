@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Excercise12Garage2.Data;
 using Excercise12Garage2.Models;
+using System.Globalization;
+using Excercise12Garage2.Models.ViewModels;
 
 namespace Excercise12Garage2.Controllers
 {
@@ -162,5 +164,50 @@ namespace Excercise12Garage2.Controllers
         {
             return _dbGarage.Vehicle.Any(e => e.Id == id);
         }
+
+        //GET: Vehicles/Receipt/5
+        // Get Receipt for Vehicle Parked in Garage
+
+        public async Task<IActionResult> Receipt()
+        {
+            var model = _dbGarage.Vehicle.Select(v => new VehicleViewModel
+            {
+                Id = v.Id,
+                RegistrationNumber = v.RegistrationNumber,
+                TimeOfArrival = v.CheckIn,
+                Type = v.VehicleType,
+
+            });
+            return View(await model.ToListAsync());
+        }
+
+        //public async Task<IActionResult> Receipt()
+        //{
+        //    ParkedVehicle parkedVehicle = TempData["parkedVehicle"] as ParkedVehicle;
+        //    ViewBag.RegistrationNumber = parkedVehicle.RegistrationNumber;
+        //    ViewBag.CheckIn = parkedVehicle.CheckIn;
+        //    ViewBag.CheckOut = DateTime.Now;
+
+        //    TimeSpan TotalTime = ViewBag.ChekOut.Subtract(ViewBag.CheckIn);
+        //    ViewBag.TotalTime = String.Format("{0} days, {1} hour, {2} minutes", TotalTime.Days, TotalTime.Hours, TotalTime.Minutes);
+        //    var price = Math.Floor(TotalTime.TotalMinutes * 3);
+        //    ViewBag.TotalPrice = price.ToString(CultureInfo.CreateSpecificCulture("sv-SE"));
+
+        //    return View();
+        //}
+
+        //public async Task<IActionResult> Receipt(VehicleViewModel viewModel)
+        //{
+        //    //ViewBag.Id = viewModel.Id;
+        //    ViewBag.RegistrationNumber = viewModel.RegistrationNumber;
+        //    ViewBag.TimeOfArrival = viewModel.TimeOfArrival;
+        //    ViewBag.ParkedTime = viewModel.ParkedTime;
+        //    var Price = viewModel.Price;
+        //    ViewBag.Price = Price.ToString(CultureInfo.CreateSpecificCulture("sv-SE"));
+
+        //    return View("Receipt", viewModel);
+
+        //}
+
     }
 }

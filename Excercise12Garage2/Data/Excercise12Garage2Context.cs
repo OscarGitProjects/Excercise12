@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Excercise12Garage2.Models;
+using Excercise12Garage2.Models.ViewModels;
 
 namespace Excercise12Garage2.Data
 {
@@ -105,5 +106,7 @@ namespace Excercise12Garage2.Data
 
                 );
         }
+
+        public DbSet<Excercise12Garage2.Models.ViewModels.VehicleViewModel> VehicleViewModel { get; set; }
     }
 }
