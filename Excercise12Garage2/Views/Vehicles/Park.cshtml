@@ -16,8 +16,7 @@
             @*Dropdown for Vehicle Type*@
             <div class="form-group">
                 @Html.LabelFor(m => m.VehicleType)
-                @Html.DropDownListFor(model => Model.VehicleType, Model.VehicleTypes, "-Please Select Vehicle Type-")
-                
+                @Html.DropDownListFor(model => Model.VehicleType, Model.VehicleTypes, "-Please Select Vehicle Type-")                
             </div>
 
             <div class="form-group">
@@ -46,12 +45,7 @@
                 <span asp-validation-for="NumberOfWheels" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CheckIn" class="control-label"></label>
-                <input asp-for="CheckIn" class="form-control" />
-                <span asp-validation-for="CheckIn" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Park vehicle" class="btn btn-primary" />
             </div>
         </form>
     </div>

@@ -11,7 +11,7 @@ namespace Excercise12Garage2.Models.ViewModels
         [DisplayName("Type of vehicle")]
         public string Type { get; set; }
 
-        [DisplayName("Registrationnummber")]
+        [DisplayName("Registrationnumber")]
         public string RegistrationNumber { get; set; }
 
         public DateTime TimeOfArrival { get; set; }
@@ -39,7 +39,7 @@ namespace Excercise12Garage2.Models.ViewModels
         {
             get
             {
-                return VehicleHelper.CalculatePrice(ParkedTime);
+                return VehicleHelper.CalculatePrice(TimeOfArrival);
             }
         }
     }

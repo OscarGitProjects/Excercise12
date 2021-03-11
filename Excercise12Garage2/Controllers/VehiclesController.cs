@@ -9,6 +9,8 @@ using Excercise12Garage2.Data;
 using Excercise12Garage2.Models;
 using System.Globalization;
 using Excercise12Garage2.Models.ViewModels;
+using Excercise12Garage2.Utils;
+using Newtonsoft.Json;
 
 namespace Excercise12Garage2.Controllers
 {
@@ -20,6 +22,144 @@ namespace Excercise12Garage2.Controllers
         {
             _dbGarage = context;
         }
+
+
+        [HttpGet]
+        public ActionResult Sort(string sortBy, string sortOrder, string txtSearchRegistrationNumber)
+        {
+            List<VehicleViewModel> lsVehicles = null;
+
+            if (String.IsNullOrWhiteSpace(sortOrder))
+                sortOrder = "asc";
+
+            if (!String.IsNullOrWhiteSpace(txtSearchRegistrationNumber))
+            {
+                txtSearchRegistrationNumber = txtSearchRegistrationNumber.Trim();
+                txtSearchRegistrationNumber = txtSearchRegistrationNumber.ToLower();
+                ViewBag.SearchFor = txtSearchRegistrationNumber;
+                lsVehicles = _dbGarage.Vehicle.Where(r => r.RegistrationNumber.ToLower().Equals(txtSearchRegistrationNumber))
+                    .Select
+                    (v => new VehicleViewModel{ 
+                        Id = v.Id,
+                        RegistrationNumber = v.RegistrationNumber,
+                        TimeOfArrival = v.CheckIn,
+                        Type = v.VehicleType
+                    })
+                    .ToList<VehicleViewModel>();
+            }
+            else
+            {
+                lsVehicles = _dbGarage.Vehicle
+                    .Select
+                    (v => new VehicleViewModel
+                    {
+                        Id = v.Id,
+                        RegistrationNumber = v.RegistrationNumber,
+                        TimeOfArrival = v.CheckIn,
+                        Type = v.VehicleType
+                    })
+                    .ToList<VehicleViewModel>();
+            }
+
+            // Sort list with vehicle
+            lsVehicles = VehicleHelper.Sort(lsVehicles, sortBy, sortOrder);
+
+            // Now set up sortOrder for next postback
+            if (sortOrder.Equals("desc"))
+                sortOrder = "asc";
+            else
+                sortOrder = "desc";
+
+
+            // Set ViewBags
+            ViewBag.SortOrder = sortOrder;
+            ViewBag.OldSortBy = sortBy;
+
+            return View("Garage", lsVehicles);
+        }
+
+
+        [HttpGet]
+        public ActionResult SearchFor(string sortOrder, string oldSortBy, string txtSearchRegistrationNumber)
+        {
+            List<VehicleViewModel> lsVehicles = null;
+
+            if (String.IsNullOrWhiteSpace(sortOrder))
+                sortOrder = "asc";
+
+            if (!String.IsNullOrWhiteSpace(txtSearchRegistrationNumber))
+            {
+                txtSearchRegistrationNumber = txtSearchRegistrationNumber.Trim();
+                txtSearchRegistrationNumber = txtSearchRegistrationNumber.ToLower();
+
+                ViewBag.SearchFor = txtSearchRegistrationNumber;
+                lsVehicles = _dbGarage.Vehicle.Where(r => r.RegistrationNumber.ToLower().Equals(txtSearchRegistrationNumber))
+                   .Select
+                    (v => new VehicleViewModel
+                    {
+                        Id = v.Id,
+                        RegistrationNumber = v.RegistrationNumber,
+                        TimeOfArrival = v.CheckIn,
+                        Type = v.VehicleType
+                    })
+                    .ToList<VehicleViewModel>();
+            }
+            else
+            {
+                lsVehicles = _dbGarage.Vehicle
+                    .Select
+                    (v => new VehicleViewModel
+                    {
+                        Id = v.Id,
+                        RegistrationNumber = v.RegistrationNumber,
+                        TimeOfArrival = v.CheckIn,
+                        Type = v.VehicleType
+                    })
+                    .ToList<VehicleViewModel>();
+            }
+
+            // Sort list with vehicle
+            lsVehicles = VehicleHelper.Sort(lsVehicles, oldSortBy, sortOrder);
+
+
+            // Set ViewBags
+            ViewBag.SortOrder = sortOrder;
+            ViewBag.OldSortBy = oldSortBy;
+
+            return View("Garage", lsVehicles);
+        }
+
+
+        // GET: VehicleController
+        public ActionResult Garage()
+        {
+            string sortOrder = "asc";
+            string sortBy = "RegistrationNumber";
+
+            List<VehicleViewModel> lsVehicles = _dbGarage.Vehicle
+                .Select
+                    (v => new VehicleViewModel
+                    {
+                        Id = v.Id,
+                        RegistrationNumber = v.RegistrationNumber,
+                        TimeOfArrival = v.CheckIn,
+                        Type = v.VehicleType
+                    })
+                    .ToList<VehicleViewModel>();
+
+
+            // Sort list with vehicle
+            lsVehicles = VehicleHelper.Sort(lsVehicles, sortBy, sortOrder);
+
+
+            // Set ViewBags
+            ViewBag.SortOrder = sortOrder;
+            ViewBag.OldSortBy = sortBy;
+
+            return View(lsVehicles);
+        }
+
+
 
         // GET: Vehicles
         // Index Page listing all Vehicles in Garage
@@ -61,32 +201,75 @@ namespace Excercise12Garage2.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Park([Bind("id,VehicleType,RegNum,Color,Make,Model,NumOfWheels,TimeOfArrival")] VehicleEditViewModel newVehicle)
-        {
-           
-
+        public async Task<IActionResult> Park([Bind("VehicleType,RegistrationNumber,Color,Make,Model,NumberOfWheels")] VehicleEditViewModel newVehicle)
+        {          
 
             if (ModelState.IsValid)
             {
-                //Create new Vehicle
-                ParkedVehicle vehicle = new ParkedVehicle();
-                
+                bool bRegistrationNumberExist = CheckIfRegistrationNumberExist(newVehicle.RegistrationNumber);
 
-                vehicle.Id = newVehicle.Id;
-                vehicle.VehicleType = newVehicle.VehicleType;
-                vehicle.RegistrationNumber = newVehicle.RegistrationNumber;
-                vehicle.Color = newVehicle.Color;
-                vehicle.Make = newVehicle.Make;
-                vehicle.Model = newVehicle.Model;
-                vehicle.NumberOfWheels = newVehicle.NumberOfWheels;
-                vehicle.CheckIn = newVehicle.CheckIn;
+                if (bRegistrationNumberExist)
+                {
+                    ModelState.AddModelError("Registrationnumber", "Registrationnumber already exist");
 
-                _dbGarage.Add(vehicle);
-                await _dbGarage.SaveChangesAsync();
-                return RedirectToAction(nameof(Details), new { id = vehicle.Id });
+                    var vTypes = GetVehicleTypes();
+                    newVehicle.VehicleTypes = GetVehicleTypeOptions(vTypes);
+                }
+                else
+                {
+                    //Create new Vehicle
+                    ParkedVehicle vehicle = new ParkedVehicle();
+                    //vehicle.Id = newVehicle.Id;
+                    vehicle.VehicleType = newVehicle.VehicleType;
+                    vehicle.RegistrationNumber = newVehicle.RegistrationNumber;
+                    vehicle.Color = newVehicle.Color;
+                    vehicle.Make = newVehicle.Make;
+                    vehicle.Model = newVehicle.Model;
+                    vehicle.NumberOfWheels = newVehicle.NumberOfWheels;
+                    vehicle.CheckIn = DateTime.Now;
+
+                    _dbGarage.Add(vehicle);
+                    await _dbGarage.SaveChangesAsync();
+                    return RedirectToAction(nameof(Details), new { id = vehicle.Id });
+                }
             }
+
             return View(newVehicle);
         }
+
+
+        /// <summary>
+        /// Method check if a vehicle with registrationnumber already exist or not
+        /// If id is < 0 then we dont check if it is the same vehicle
+        /// </summary>        
+        /// <param name="strRegistrationNumber">Registrationnumber</param>
+        /// <param name="id">Id for vehicle. Deafult is -1</param>
+        /// <returns>true if registrationnumber exist. Otherwise false</returns>
+        private bool CheckIfRegistrationNumberExist(string strRegistrationNumber, int id = -1)
+        {
+            bool bExist = false;
+
+            if (!String.IsNullOrWhiteSpace(strRegistrationNumber))
+            {
+                strRegistrationNumber = strRegistrationNumber.Trim();
+                strRegistrationNumber = strRegistrationNumber.ToLower();
+                var vehicle = _dbGarage.Vehicle.AsNoTracking().Where(r => r.RegistrationNumber.ToLower().Equals(strRegistrationNumber)).FirstOrDefault();
+
+                if(id < 0)
+                {
+                    if (vehicle != null)
+                        bExist = true;
+                }
+                else
+                {
+                    if (vehicle != null && vehicle.Id != id)
+                        bExist = true;
+                }
+            }
+
+            return bExist;
+        }
+
 
         private  IEnumerable<string> GetVehicleTypes()
         {
@@ -139,32 +322,43 @@ namespace Excercise12Garage2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,VehicleType,RegNum,Color,Make,Model,NumOfWheels,TimeOfArrival")] ParkedVehicle vehicle)
+        public async Task<IActionResult> Edit(int Id, [Bind("Id,VehicleType,RegistrationNumber,Color,Make,Model,NumberOfWheels")] ParkedVehicle vehicle)
         {
-            if (id != vehicle.Id)
+            if (Id != vehicle.Id)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
-                try
+                bool bRegistrationNumberExist = CheckIfRegistrationNumberExist(vehicle.RegistrationNumber, vehicle.Id);
+
+                if (bRegistrationNumberExist)
                 {
-                    _dbGarage.Update(vehicle);
-                    await _dbGarage.SaveChangesAsync();
+                    ModelState.AddModelError("Registrationnumber", "Registrationnumber already exist");
                 }
-                catch (DbUpdateConcurrencyException)
+                else
                 {
-                    if (!VehicleExists(vehicle.Id))
+                    try
                     {
-                        return NotFound();
+                        _dbGarage.Vehicle.Attach(vehicle).State = EntityState.Modified;
+                        _dbGarage.Entry(vehicle).Property(c => c.CheckIn).IsModified = false;
+                        await _dbGarage.SaveChangesAsync();
                     }
-                    else
+                    catch (DbUpdateConcurrencyException)
                     {
-                        throw;
+                        if (!VehicleExists(vehicle.Id))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
                     }
+
+                    return RedirectToAction(nameof(Index));
                 }
-                return RedirectToAction(nameof(Index));
             }
             return View(vehicle);
         }
@@ -195,10 +389,24 @@ namespace Excercise12Garage2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> RemoveConfirmed(int id)
         {
+            VehicleReceiptViewModel receipt = null;
+
             var vehicle = await _dbGarage.Vehicle.FindAsync(id);
+            if(vehicle != null)
+            {
+                receipt = new VehicleReceiptViewModel();
+                receipt.CheckIn = vehicle.CheckIn;
+                receipt.Id = vehicle.Id;
+                receipt.RegistrationNumber = vehicle.RegistrationNumber;
+                receipt.Type = vehicle.VehicleType;
+            }
+
+            TempData["Reciept"] = JsonConvert.SerializeObject(receipt);
+
             _dbGarage.Vehicle.Remove(vehicle);
             await _dbGarage.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return View("Receipt)", receipt);
+            //return RedirectToAction(nameof(Receipt));
         }
 
         private bool VehicleExists(int id)
@@ -209,46 +417,15 @@ namespace Excercise12Garage2.Controllers
         //GET: Vehicles/Receipt/5
         // Get Receipt for Vehicle Parked in Garage
 
-        public async Task<IActionResult> Receipt()
-        {
-            var model = _dbGarage.Vehicle.Select(v => new VehicleViewModel
-            {
-                Id = v.Id,
-                RegistrationNumber = v.RegistrationNumber,
-                TimeOfArrival = v.CheckIn,
-                Type = v.VehicleType,
-
-            });
-            return View(await model.ToListAsync());
-        }
-
-        //public async Task<IActionResult> Receipt()
+        //public IActionResult Receipt()
         //{
-        //    ParkedVehicle parkedVehicle = TempData["parkedVehicle"] as ParkedVehicle;
-        //    ViewBag.RegistrationNumber = parkedVehicle.RegistrationNumber;
-        //    ViewBag.CheckIn = parkedVehicle.CheckIn;
-        //    ViewBag.CheckOut = DateTime.Now;
+        //    VehicleReceiptViewModel receiptViewModel = null;
+                     
+        //    var data =  JsonConvert.DeserializeObject<VehicleReceiptViewModel>( (string)TempData["Reciept"]);
+        //    if(data != null)
+        //        receiptViewModel = data as VehicleReceiptViewModel;
 
-        //    TimeSpan TotalTime = ViewBag.ChekOut.Subtract(ViewBag.CheckIn);
-        //    ViewBag.TotalTime = String.Format("{0} days, {1} hour, {2} minutes", TotalTime.Days, TotalTime.Hours, TotalTime.Minutes);
-        //    var price = Math.Floor(TotalTime.TotalMinutes * 3);
-        //    ViewBag.TotalPrice = price.ToString(CultureInfo.CreateSpecificCulture("sv-SE"));
-
-        //    return View();
+        //    return View(receiptViewModel);
         //}
-
-        //public async Task<IActionResult> Receipt(VehicleViewModel viewModel)
-        //{
-        //    //ViewBag.Id = viewModel.Id;
-        //    ViewBag.RegistrationNumber = viewModel.RegistrationNumber;
-        //    ViewBag.TimeOfArrival = viewModel.TimeOfArrival;
-        //    ViewBag.ParkedTime = viewModel.ParkedTime;
-        //    var Price = viewModel.Price;
-        //    ViewBag.Price = Price.ToString(CultureInfo.CreateSpecificCulture("sv-SE"));
-
-        //    return View("Receipt", viewModel);
-
-        //}
-
     }
 }

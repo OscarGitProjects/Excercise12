@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Excercise12Garage2.Models.ViewModels.VehicleViewModel>
+﻿@model Excercise12Garage2.Models.ViewModels.VehicleReceiptViewModel
 
 @{
     ViewData["Title"] = "Receipt";
@@ -6,9 +6,8 @@
 
 <h1>Receipt</h1>
 
-
 <div class="container mt-0">
-    <h2> Receipt for @Model.RegistrationNumber </h2>
+    <h2> Receipt for @Model.RegistrationNumber</h2>
     <div class="col-md-4">
         <table>
             <tr>
@@ -18,7 +17,7 @@
             </tr>
             <tr>
                 <td>
-                    @ViewBag.TimeOfArrival
+                    @Model.CheckIn
                 </td>
             </tr>
             <tr>
@@ -28,7 +27,7 @@
             </tr>
             <tr>
                 <td>
-                    @ViewBag.ParkedTime
+                    @*Model.ParkedTime*@
                 </td>
             </tr>
             <tr>
@@ -38,7 +37,7 @@
             </tr>
             <tr>
                 <td>
-                    @ViewBag.Price
+                    @*@Model.Price*@
                 </td>
             </tr>
         </table>
@@ -46,43 +45,7 @@
     </div>
 
 </div>
-@Html.ActionLink("Back", "Index")
 
-
-@*<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Type)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RegistrationNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TimeOfArrival)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Type)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RegistrationNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TimeOfArrival)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>*@
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
