@@ -4,13 +4,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Excercise12Garage2.Models
 {
-        public class ParkedVehicle
-        {
+    public class ParkedVehicle
+    {
             public int Id { get; set; }
 
             [DisplayName("Type of vehicle")]
@@ -39,8 +37,5 @@ namespace Excercise12Garage2.Models
             [NotMapped]
             public IEnumerable<SelectListItem> VehicleTypes { get; set; }
 
-
-    }
-
-    
+    }    
 }

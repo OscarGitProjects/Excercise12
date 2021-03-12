@@ -395,28 +395,39 @@ namespace Excercise12Garage2.Controllers
         {
             VehicleStatisticsViewModel viewModel = new VehicleStatisticsViewModel();
 
-            var sumOfWheels = _dbGarage.Vehicle.Sum(v => v.NumberOfWheels);            
+            // Count number of vehicles in the garage
+            viewModel.NumberOfVehiclesInGarage = await _dbGarage.Vehicle.CountAsync();
+
+
+            // Calculate number of wheels att vehicles in the garage
+            var sumOfWheels = await _dbGarage.Vehicle.SumAsync(v => v.NumberOfWheels);            
             viewModel.SumOfWheels = sumOfWheels;
 
+
+            // Calculate total revenue for vehicles in the garage
             DateTime dtNow = DateTime.Now;
-            double dblTotalMinutes = 0.0;
+            int iPricePerMinute = 3;
+            var sum = await _dbGarage.Vehicle.SumAsync(c => EF.Functions.DateDiffMinute(c.CheckIn, dtNow) * iPricePerMinute);
+            viewModel.TotalRevenue = sum;
 
-            var vehicles = _dbGarage.Vehicle.ToList();
-            foreach(var vehicle in vehicles)
-                dblTotalMinutes += (dtNow - vehicle.CheckIn).TotalMinutes;
+            //double dblTotalMinutes = 0.0;
+            //var vehicles = _dbGarage.Vehicle.ToList();
+            //foreach(var vehicle in vehicles)
+            //    dblTotalMinutes += Math.Round((dtNow - vehicle.CheckIn).TotalMinutes) * iPricePerMinute;
 
-            viewModel.TotalRevenue = (double)(dblTotalMinutes * 3);
+            //viewModel.TotalRevenue = dblTotalMinutes;
 
-            //ViewBag.SumOfWheels = sumOfWheels;
-            //var model = _dbGarage.Vehicle.Select(p => new VehicleViewModel
-            //{
 
-            //});
-
-            //if (name != null)
-            //    model = model.Where(p => p.Name.Contains(name));
-
-            //return View("Index2", await model.ToListAsync());
+            // Calculate number of vehicles in every group of vehicles
+            viewModel.VehicleCountByType = _dbGarage.Vehicle
+                .GroupBy(t => t.VehicleType)
+                .Select(group => new VehicleCountByTypeViewModel
+                {
+                    VehicleTyp = group.Key,
+                    VehicleCount = group.Count()
+                })
+                .OrderBy(t => t.VehicleTyp)
+                .ToList();
 
             return View(viewModel);
         }
@@ -452,19 +463,5 @@ namespace Excercise12Garage2.Controllers
         {
             return _dbGarage.Vehicle.Any(e => e.Id == id);
         }
-
-        //GET: Vehicles/Receipt/5
-        // Get Receipt for Vehicle Parked in Garage
-
-        //public IActionResult Receipt()
-        //{
-        //    VehicleReceiptViewModel receiptViewModel = null;
-                     
-        //    var data =  JsonConvert.DeserializeObject<VehicleReceiptViewModel>( (string)TempData["Reciept"]);
-        //    if(data != null)
-        //        receiptViewModel = data as VehicleReceiptViewModel;
-
-        //    return View(receiptViewModel);
-        //}
     }
 }

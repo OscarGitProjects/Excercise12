@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Excercise12Garage2.Migrations
 {
     [DbContext(typeof(Excercise12Garage2Context))]
-    [Migration("20210310123615_Init")]
+    [Migration("20210312142239_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,6 +20,24 @@ namespace Excercise12Garage2.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.4")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Excercise12Garage2.Models.Garage", b =>
+                {
+                    b.Property<int>("GaregeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NumberOfParkingPlaces")
+                        .HasColumnType("int");
+
+                    b.HasKey("GaregeId");
+
+                    b.ToTable("Garage");
+                });
 
             modelBuilder.Entity("Excercise12Garage2.Models.ParkedVehicle", b =>
                 {
@@ -44,7 +62,6 @@ namespace Excercise12Garage2.Migrations
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<int>("NumberOfWheels")
-                        .HasMaxLength(1)
                         .HasColumnType("int");
 
                     b.Property<string>("RegistrationNumber")
@@ -61,29 +78,29 @@ namespace Excercise12Garage2.Migrations
                         new
                         {
                             Id = 1,
-                            CheckIn = new DateTime(2021, 2, 22, 13, 36, 15, 269, DateTimeKind.Local).AddTicks(8000),
+                            CheckIn = new DateTime(2021, 2, 24, 15, 22, 38, 947, DateTimeKind.Local).AddTicks(8691),
                             Color = "Blue",
                             Make = "Koenigsegg",
                             Model = "CCR",
                             NumberOfWheels = 4,
                             RegistrationNumber = "EKY 055",
-                            VehicleType = "Sports Car"
+                            VehicleType = "Sportscar"
                         },
                         new
                         {
                             Id = 2,
-                            CheckIn = new DateTime(2021, 2, 5, 13, 36, 15, 271, DateTimeKind.Local).AddTicks(4278),
+                            CheckIn = new DateTime(2021, 2, 7, 15, 22, 38, 951, DateTimeKind.Local).AddTicks(8976),
                             Color = "silver",
                             Make = "Scania AB",
                             Model = "2017 Scania R Series",
                             NumberOfWheels = 8,
                             RegistrationNumber = "KST 810",
-                            VehicleType = "Trucks"
+                            VehicleType = "Truck"
                         },
                         new
                         {
                             Id = 3,
-                            CheckIn = new DateTime(2021, 2, 18, 13, 36, 15, 271, DateTimeKind.Local).AddTicks(4301),
+                            CheckIn = new DateTime(2021, 2, 20, 15, 22, 38, 951, DateTimeKind.Local).AddTicks(9044),
                             Color = "Green",
                             Make = "Volvo",
                             Model = "2018 D Series",
@@ -94,40 +111,40 @@ namespace Excercise12Garage2.Migrations
                         new
                         {
                             Id = 4,
-                            CheckIn = new DateTime(2021, 3, 5, 13, 36, 15, 271, DateTimeKind.Local).AddTicks(4305),
+                            CheckIn = new DateTime(2021, 3, 7, 15, 22, 38, 951, DateTimeKind.Local).AddTicks(9064),
                             Color = "Black",
                             Make = "SAAB",
                             Model = "Saab 9000",
                             NumberOfWheels = 4,
                             RegistrationNumber = "H 965",
-                            VehicleType = "Car"
+                            VehicleType = "Boat"
                         },
                         new
                         {
                             Id = 5,
-                            CheckIn = new DateTime(2021, 3, 6, 13, 36, 15, 271, DateTimeKind.Local).AddTicks(4308),
+                            CheckIn = new DateTime(2021, 3, 8, 15, 22, 38, 951, DateTimeKind.Local).AddTicks(9078),
                             Color = "Ash",
                             Make = "Husqvarna",
                             Model = "Husqvarna 2020",
                             NumberOfWheels = 2,
                             RegistrationNumber = "H 345",
-                            VehicleType = "Motorcycles"
+                            VehicleType = "Motorcycle"
                         },
                         new
                         {
                             Id = 6,
-                            CheckIn = new DateTime(2021, 3, 3, 13, 36, 15, 271, DateTimeKind.Local).AddTicks(4310),
+                            CheckIn = new DateTime(2021, 3, 5, 15, 22, 38, 951, DateTimeKind.Local).AddTicks(9093),
                             Color = "White",
                             Make = "SSPA Sweden AB",
                             Model = "SSPA 2019",
                             NumberOfWheels = 2,
                             RegistrationNumber = "IMO 8814275",
-                            VehicleType = "Ship"
+                            VehicleType = "Boat"
                         },
                         new
                         {
                             Id = 7,
-                            CheckIn = new DateTime(2021, 2, 27, 13, 36, 15, 271, DateTimeKind.Local).AddTicks(4312),
+                            CheckIn = new DateTime(2021, 3, 1, 15, 22, 38, 951, DateTimeKind.Local).AddTicks(9108),
                             Color = "Yellow",
                             Make = "SAS",
                             Model = "Airbus A330",
@@ -135,6 +152,44 @@ namespace Excercise12Garage2.Migrations
                             RegistrationNumber = "A330-300",
                             VehicleType = "Airplane"
                         });
+                });
+
+            modelBuilder.Entity("Excercise12Garage2.Models.VehicleParkingPlace", b =>
+                {
+                    b.Property<int>("ParkingPlaceId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsAvailableParkingPlace")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsFreeParkingPlace")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsHandicapped")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("VehicleId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ParkingPlaceId");
+
+                    b.HasIndex("VehicleId");
+
+                    b.ToTable("VehicleParkingPlace");
+                });
+
+            modelBuilder.Entity("Excercise12Garage2.Models.VehicleParkingPlace", b =>
+                {
+                    b.HasOne("Excercise12Garage2.Models.ParkedVehicle", "Vehicle")
+                        .WithMany()
+                        .HasForeignKey("VehicleId");
+
+                    b.Navigation("Vehicle");
                 });
 #pragma warning restore 612, 618
         }
