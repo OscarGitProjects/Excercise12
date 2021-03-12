@@ -104,6 +104,8 @@ namespace Excercise12Garage2.Data
                 );
         }
 
-        public DbSet<Excercise12Garage2.Models.ViewModels.VehicleViewModel> VehicleViewModel { get; set; }
+        //public DbSet<Excercise12Garage2.Models.ViewModels.VehicleViewModel> VehicleViewModel { get; set; }
+
+        //public DbSet<Excercise12Garage2.Models.ViewModels.VehicleStatisticsViewModel> VehicleStatisticsViewModel { get; set; }
     }
 }
