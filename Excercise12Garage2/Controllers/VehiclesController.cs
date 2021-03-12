@@ -165,6 +165,12 @@ namespace Excercise12Garage2.Controllers
         // Index Page listing all Vehicles in Garage
         public async Task<IActionResult> Index()
         {
+            var messageObject = TempData["message"];
+            if(messageObject != null)
+            {
+                ViewBag.Message = messageObject as string;
+            }
+
             return View(await _dbGarage.Vehicle.ToListAsync());
         }
 
@@ -344,6 +350,8 @@ namespace Excercise12Garage2.Controllers
                         _dbGarage.Vehicle.Attach(vehicle).State = EntityState.Modified;
                         _dbGarage.Entry(vehicle).Property(c => c.CheckIn).IsModified = false;
                         await _dbGarage.SaveChangesAsync();
+
+                        TempData["message"] = "You have updated information for vehicle " + vehicle.RegistrationNumber;
                     }
                     catch (DbUpdateConcurrencyException)
                     {
@@ -381,6 +389,19 @@ namespace Excercise12Garage2.Controllers
 
             return View(vehicle);
         }
+
+
+        // GET: Vehicles/Statistics/5
+        //Statisctics
+       /* public async Task<IActionResult> Statistics()
+        {
+            
+            foreach (var item in collection)
+            {
+
+            }
+            return View();
+        }*/
 
         // POST: Vehicles/Delete/5
         // Confirm Vehicle out of Garage 

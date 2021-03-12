@@ -27,8 +27,8 @@ namespace Excercise12Garage2.Controllers
 
         public IActionResult Index()
         {
-            return RedirectToAction("Index", "Vehicles");
-            //return View();
+            /*return RedirectToAction("Index", "Vehicles");*/
+            return View();
 
             // need to create a ViewModel to return view.
 
