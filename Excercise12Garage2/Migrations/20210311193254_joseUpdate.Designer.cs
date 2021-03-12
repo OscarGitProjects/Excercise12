@@ -4,14 +4,16 @@ using Excercise12Garage2.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Excercise12Garage2.Migrations
 {
     [DbContext(typeof(Excercise12Garage2Context))]
-    partial class Excercise12Garage2ContextModelSnapshot : ModelSnapshot
+    [Migration("20210311193254_joseUpdate")]
+    partial class joseUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

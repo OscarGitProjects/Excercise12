@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Excercise12Garage2.Models;
 using Microsoft.EntityFrameworkCore;
-using Excercise12Garage2.Models;
-using Excercise12Garage2.Models.ViewModels;
+using System;
 
 namespace Excercise12Garage2.Data
 {
     public class Excercise12Garage2Context : DbContext
     {
-        public DbSet<Excercise12Garage2.Models.ParkedVehicle> Vehicle { get; set; }
+        public DbSet<ParkedVehicle> Vehicle { get; set; }
 
         public Excercise12Garage2Context(DbContextOptions<Excercise12Garage2Context> options)
             : base(options)

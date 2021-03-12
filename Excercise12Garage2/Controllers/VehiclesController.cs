@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Excercise12Garage2.Data;
+using Excercise12Garage2.Models;
+using Excercise12Garage2.Models.ViewModels;
+using Excercise12Garage2.Utils;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Excercise12Garage2.Data;
-using Excercise12Garage2.Models;
-using System.Globalization;
-using Excercise12Garage2.Models.ViewModels;
-using Excercise12Garage2.Utils;
-using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Excercise12Garage2.Controllers
 {
@@ -270,7 +268,7 @@ namespace Excercise12Garage2.Controllers
             return bExist;
         }
 
-
+        //List of Vehicle Types for Dropdown in Park
         private  IEnumerable<string> GetVehicleTypes()
         {
              
@@ -286,6 +284,7 @@ namespace Excercise12Garage2.Controllers
             };
         }
         
+        //Creates Enumerable List for Dropdown
         private IEnumerable<SelectListItem> GetVehicleTypeOptions(IEnumerable<string> elements)
         {
             var typeList = new List<SelectListItem>();
