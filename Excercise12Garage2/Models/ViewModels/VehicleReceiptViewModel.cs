@@ -35,6 +35,15 @@ namespace Excercise12Garage2.Models.ViewModels
             }
         }
 
+        [DisplayName("Time of leaving")]
+        public string TimeOfLeavingAsString
+        {
+            get
+            {
+                return DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString();
+            }
+        }
+
         [DisplayFormat(DataFormatString = "{0:C}")]
         [DisplayName("Price")]
         public double Price
@@ -44,6 +53,7 @@ namespace Excercise12Garage2.Models.ViewModels
                 return VehicleHelper.CalculatePrice(CheckIn);
             }
         }
+
     //public string Price
     //{
     //    get
