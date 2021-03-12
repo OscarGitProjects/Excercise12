@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Excercise12Garage2.Data;
+using Excercise12Garage2.Models;
+using Excercise12Garage2.Models.ViewModels;
+using Excercise12Garage2.Utils;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Excercise12Garage2.Data;
-using Excercise12Garage2.Models;
-using System.Globalization;
-using Excercise12Garage2.Models.ViewModels;
-using Excercise12Garage2.Utils;
-using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Excercise12Garage2.Controllers
 {
@@ -393,15 +391,35 @@ namespace Excercise12Garage2.Controllers
 
         // GET: Vehicles/Statistics/5
         //Statisctics
-       /* public async Task<IActionResult> Statistics()
+        public async Task<IActionResult> Statistics()
         {
-            
-            foreach (var item in collection)
-            {
+            VehicleStatisticsViewModel viewModel = new VehicleStatisticsViewModel();
 
-            }
-            return View();
-        }*/
+            var sumOfWheels = _dbGarage.Vehicle.Sum(v => v.NumberOfWheels);            
+            viewModel.SumOfWheels = sumOfWheels;
+
+            DateTime dtNow = DateTime.Now;
+            double dblTotalMinutes = 0.0;
+
+            var vehicles = _dbGarage.Vehicle.ToList();
+            foreach(var vehicle in vehicles)
+                dblTotalMinutes += (dtNow - vehicle.CheckIn).TotalMinutes;
+
+            viewModel.TotalRevenue = (double)(dblTotalMinutes * 3);
+
+            //ViewBag.SumOfWheels = sumOfWheels;
+            //var model = _dbGarage.Vehicle.Select(p => new VehicleViewModel
+            //{
+
+            //});
+
+            //if (name != null)
+            //    model = model.Where(p => p.Name.Contains(name));
+
+            //return View("Index2", await model.ToListAsync());
+
+            return View(viewModel);
+        }
 
         // POST: Vehicles/Delete/5
         // Confirm Vehicle out of Garage 
