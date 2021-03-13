@@ -26,12 +26,13 @@ namespace Excercise12Garage2.Models
         [StringLength(20)]
         [DisplayFormat(NullDisplayText = "Undefined")]
         public string Model { get; set; }
+
+        [Range(0, 1000, ErrorMessage = "Cannot select less than one")]
         public int NumberOfWheels { get; set; }
         public DateTime CheckIn { get; set; }
 
         [NotMapped]
         public IEnumerable<SelectListItem> VehicleTypes { get; set; }
-
 
     }
 }

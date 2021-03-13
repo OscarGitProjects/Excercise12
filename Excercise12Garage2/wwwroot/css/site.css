@@ -59,9 +59,19 @@ html {
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+    background-color: black;
+    background-image: url(../traffic.jpg);
+    color: lightgray;
 }
+
+.container {
+    color: black;
+    background-color: rgba( 102, 102, 102, 0.3);
+    
+}
+
 .footer {
   position: absolute;
   bottom: 0;

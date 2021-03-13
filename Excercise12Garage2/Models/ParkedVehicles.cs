@@ -30,6 +30,8 @@ namespace Excercise12Garage2.Models
             [DisplayName("Model")]
             public string Model { get; set; }
             [DisplayName("Number of wheels")]
+
+            [Range(0,1000,ErrorMessage ="Cannot select less than one")]
             public int NumberOfWheels { get; set; }
             [DisplayName("Time of arrival")]
             public DateTime CheckIn { get; set; }

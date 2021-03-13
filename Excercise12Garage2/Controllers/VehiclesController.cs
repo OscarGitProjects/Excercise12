@@ -232,8 +232,10 @@ namespace Excercise12Garage2.Controllers
                     vehicle.NumberOfWheels = newVehicle.NumberOfWheels;
                     vehicle.CheckIn = DateTime.Now;
 
+
                     _dbGarage.Add(vehicle);
                     await _dbGarage.SaveChangesAsync();
+                    TempData["message"] = $"You have succesfully parked your {vehicle.VehicleType}!";
                     return RedirectToAction(nameof(Details), new { id = vehicle.Id });
                 }
             }
@@ -408,6 +410,10 @@ namespace Excercise12Garage2.Controllers
 
             viewModel.TotalRevenue = (double)(dblTotalMinutes * 3);
 
+
+
+            
+
             //ViewBag.SumOfWheels = sumOfWheels;
             //var model = _dbGarage.Vehicle.Select(p => new VehicleViewModel
             //{
@@ -445,6 +451,7 @@ namespace Excercise12Garage2.Controllers
 
             _dbGarage.Vehicle.Remove(vehicle);
             await _dbGarage.SaveChangesAsync();
+            TempData["message"] = $"You have successfully removed your {vehicle.VehicleType}!";
             return View("Receipt", receipt);
             //return RedirectToAction(nameof(Receipt));
         }

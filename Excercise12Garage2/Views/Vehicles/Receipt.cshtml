@@ -6,6 +6,10 @@
 
 <h1>Receipt</h1>
 
+@{
+    await Html.RenderPartialAsync("_MessageView");
+}
+
 <div>
     <h4>Vehicle</h4>
     <hr />
@@ -49,5 +53,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Back to Garage</a>
+    
 </div>
