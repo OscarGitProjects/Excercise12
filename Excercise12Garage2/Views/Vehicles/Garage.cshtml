@@ -4,7 +4,7 @@
     ViewData["Title"] = "Parked vehicles";
 }
 
-<h1>Parked vehicles</h1>
+<h1 class="display-3 w-25">Parked vehicles</h1>
 
 <br/>
 
@@ -15,7 +15,7 @@
         <div class="col-md-6">
             <div class="input-group">
                 <input type="text" class="form-control" id="txtSearchRegistrationNumber" name="txtSearchRegistrationNumber" placeholder="Search for Registrationnumber" value="@ViewBag.SearchFor" />
-                <button class="btn btn-primary" id="search" type="submit">Search</button>
+                <button class="btn btn-dark" id="search" type="submit">Search</button>
             </div>
         </div>
     </div>
@@ -24,7 +24,7 @@
 <hr />
 
 <p>
-    <a asp-action="Park">Park vehicle</a>
+    <a class="btn btn-secondary" asp-action="Park">Park vehicle</a>
 </p>
 
 @if (Model != null && Model.Count() > 0)
@@ -69,9 +69,9 @@
                     @Html.DisplayFor(modelItem => item.ParkedTime)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Leave the garage", "Remove", new { id = item.Id })
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new {@class = "text-light btn btn-secondary btn-sm" }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "text-light btn btn-secondary btn-sm" }) |
+                    @Html.ActionLink("Leave the garage", "Remove", new { id = item.Id }, new { @class = "text-light btn btn-secondary btn-sm" })
                 </td>
             </tr>
         }
@@ -88,5 +88,5 @@ else
 <hr />
 
 <div>
-    <a asp-action="Index">Back to Garage</a>
+    <a class="btn btn-secondary" asp-action="Index">Back to Garage</a>
 </div>

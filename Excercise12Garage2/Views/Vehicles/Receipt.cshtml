@@ -4,7 +4,7 @@
     ViewData["Title"] = "Receipt";
 }
 
-<h1>Receipt</h1>
+<h1 class="w-25 font-weight-bold">Receipt</h1>
 
 @{
     await Html.RenderPartialAsync("_MessageView");
@@ -53,6 +53,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Index">Back to Garage</a>
+    <a class="btn btn-outline-secondary" asp-action="Index">Back to Garage</a>
     
 </div>

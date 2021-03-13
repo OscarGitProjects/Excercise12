@@ -4,14 +4,14 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Garage</h1>
+<h1 class="display-3 w-25">Garage</h1>
 
 @{
     await Html.RenderPartialAsync("_MessageView");
 }
 
 <p>
-    <a asp-action="Park">Park vehicle</a>
+    <a class="btn btn-secondary" asp-action="Park">Park vehicle</a>
 </p>
 
 <table class="table table-striped">
@@ -67,9 +67,9 @@
                     @Html.DisplayFor(modelItem => item.CheckIn)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Remove" asp-route-id="@item.Id">Leave the garage</a>
+                    <a class="btn btn-secondary btn-sm" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a class="btn btn-secondary btn-sm" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a class="btn btn-secondary btn-sm" asp-action="Remove" asp-route-id="@item.Id">Leave the garage</a>
                 </td>
             </tr>
         }

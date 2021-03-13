@@ -4,6 +4,7 @@ using Excercise12Garage2.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
+using System.Linq;
 
 namespace Excercise12Garage2.Controllers
 {

@@ -4,7 +4,7 @@
     ViewData["Title"] = "Remove";
 }
 
-<h1>Take Out Vehicle</h1>
+<h1 class="w-25">Take Out Vehicle</h1>
 
 <h3>Are you sure you want to take this vehicle out?</h3>
 <div>
@@ -58,6 +58,6 @@
     <form asp-action="Remove">
         <input type="hidden" asp-for="Id" />
         <input type="submit" value="Remove" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to Garage</a>
+        <a class="btn btn-outline-secondary" asp-action="Index">Back to Garage</a>
     </form>
 </div>

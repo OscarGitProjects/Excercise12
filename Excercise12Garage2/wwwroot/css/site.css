@@ -67,8 +67,28 @@ body {
 }
 
 .container {
-    color: black;
+    color: ghostwhite;
     background-color: rgba( 102, 102, 102, 0.3);
+}
+
+.card{
+    color: black;
+}
+
+.table {
+    color:white;
+}
+
+tbody {
+    background-color: rgba( 0, 0, 0, 0.8);
+}
+
+dl {
+    background-color: rgba( 0, 0, 0, 0.8);
+}
+
+h1 {
+    background-color: rgba( 0, 0, 0, 0.8);
     
 }
 
