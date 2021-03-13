@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Excercise12Garage2.Models
 {
     public class ParkedVehicle
-        {
+    {
             public int Id { get; set; }
 
             [DisplayName("Type of vehicle")]
@@ -39,8 +39,5 @@ namespace Excercise12Garage2.Models
             [NotMapped]
             public IEnumerable<SelectListItem> VehicleTypes { get; set; }
 
-
-    }
-
-    
+    }    
 }

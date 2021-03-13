@@ -1,9 +1,12 @@
-﻿@{
-    ViewData["Title"] = "Group 3 Garage";
+﻿@model Excercise12Garage2.Models.ViewModels.HomeViewModel
+
+@{
+    ViewData["Title"] = Model.GarageName;
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome to Group 3 Garage!</h1>
+    <h1 class="display-4">Welcome to @Model.GarageName</h1>
+    <h4>Number of vehicles in the garage is @Model.NumberOfVehiclesInGarage</h4>
     <hr/>
     <h4>Please enjoy your time in our garage, thank you! :)</h4>
 </div>

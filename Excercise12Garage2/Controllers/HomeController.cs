@@ -1,4 +1,6 @@
-﻿using Excercise12Garage2.Models;
+﻿using Excercise12Garage2.Data;
+using Excercise12Garage2.Models;
+using Excercise12Garage2.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
@@ -7,28 +9,28 @@ namespace Excercise12Garage2.Controllers
 {
     public class HomeController : Controller
     {
-        /// <summary>
-        /// Logger
-        /// I love summer and C#. And stuff. More stuff
-        /// I am learning GIT in a very painful way ... 
-        /// I love summer and C#
-        /// Lite ändringar more
-        /// </summary>
         private readonly ILogger<HomeController> _logger;
+        private readonly Excercise12Garage2Context _dbGarage;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, Excercise12Garage2Context context)
         {
             _logger = logger;
+            _dbGarage = context;
         }
 
         public IActionResult Index()
         {
-            /*return RedirectToAction("Index", "Vehicles");*/
-            return View();
+            HomeViewModel viewModel = new HomeViewModel();
 
-            // need to create a ViewModel to return view.
+            var garage = _dbGarage.Garage.FirstOrDefault();
+            if (garage != null)
+            {
+                viewModel.GarageName = garage.Name;
+                viewModel.NumberOfParkingPlaces = garage.NumberOfParkingPlaces;
+                viewModel.NumberOfVehiclesInGarage = _dbGarage.Vehicle.Count();
+            }
 
-            // This is another update from me.
+            return View(viewModel);
         }
 
         public IActionResult About()

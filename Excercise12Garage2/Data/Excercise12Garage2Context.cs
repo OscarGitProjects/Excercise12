@@ -8,6 +8,10 @@ namespace Excercise12Garage2.Data
     {
         public DbSet<ParkedVehicle> Vehicle { get; set; }
 
+        public DbSet<Excercise12Garage2.Models.Garage> Garage { get; set; }
+
+        public DbSet<Excercise12Garage2.Models.VehicleParkingPlace> VehicleParkingPlace { get; set; }
+
         public Excercise12Garage2Context(DbContextOptions<Excercise12Garage2Context> options)
             : base(options)
         {
@@ -17,6 +21,14 @@ namespace Excercise12Garage2.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Garage>().HasData(
+                new Garage
+                {
+                    GaregeId = 1,
+                    Name = "Group 3. Garage",
+                    NumberOfParkingPlaces = 0
+                });
 
             modelBuilder.Entity<ParkedVehicle>().HasData(
                  new ParkedVehicle
@@ -103,9 +115,5 @@ namespace Excercise12Garage2.Data
 
                 );
         }
-
-        //public DbSet<Excercise12Garage2.Models.ViewModels.VehicleViewModel> VehicleViewModel { get; set; }
-
-        //public DbSet<Excercise12Garage2.Models.ViewModels.VehicleStatisticsViewModel> VehicleStatisticsViewModel { get; set; }
     }
 }
