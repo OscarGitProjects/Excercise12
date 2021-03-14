@@ -1,12 +1,12 @@
 ﻿@model Excercise12Garage2.Models.ParkedVehicle
 
 @{
-    ViewData["Title"] = "Remove";
+    ViewData["Title"] = "Leave the garage";
 }
 
-<h1 class="w-25">Take Out Vehicle</h1>
+<h1 class="w-25">Leave the garage</h1>
 
-<h3>Are you sure you want to take this vehicle out?</h3>
+<h3>Are you sure you want to leave the garage?</h3>
 <div>
     <h4>Vehicle</h4>
     <hr />
@@ -57,7 +57,7 @@
     
     <form asp-action="Remove">
         <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Remove" class="btn btn-danger" /> |
-        <a class="btn btn-outline-secondary" asp-action="Index">Back to Garage</a>
+        <input type="submit" value="Remove" class="btn btn-danger" />
+        <a class="btn btn-secondary" asp-action="Index">Back to Garage</a>
     </form>
 </div>

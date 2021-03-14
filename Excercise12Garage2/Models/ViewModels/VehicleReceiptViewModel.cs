@@ -9,10 +9,13 @@ namespace Excercise12Garage2.Models.ViewModels
     public class VehicleReceiptViewModel
     {
         public int Id { get; set; }
+
         [DisplayName("Registrationnumber")]
         public string RegistrationNumber{ get; set; }
+
         [DisplayName("Type of vehicle")]
         public string Type { get; set; }
+
         [DisplayName("Time of arrival")]
         public DateTime CheckIn { get; set; }
 
@@ -53,13 +56,5 @@ namespace Excercise12Garage2.Models.ViewModels
                 return VehicleHelper.CalculatePrice(CheckIn);
             }
         }
-
-    //public string Price
-    //{
-    //    get
-    //    {
-    //        return VehicleHelper.CalculatePrice(CheckIn);
-    //    }
-    //}
-}
+    }
 }

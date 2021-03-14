@@ -251,7 +251,7 @@ namespace Excercise12Garage2.Controllers
         /// <param name="strRegistrationNumber">Registrationnumber</param>
         /// <param name="id">Id for vehicle. Deafult is -1</param>
         /// <returns>true if registrationnumber exist. Otherwise false</returns>
-        private bool CheckIfRegistrationNumberExist(string strRegistrationNumber, int id = -1)
+        public bool CheckIfRegistrationNumberExist(string strRegistrationNumber, int id = -1)
         {
             bool bExist = false;
 

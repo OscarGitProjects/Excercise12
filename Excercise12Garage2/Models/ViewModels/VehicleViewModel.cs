@@ -15,6 +15,7 @@ namespace Excercise12Garage2.Models.ViewModels
         [DisplayName("Registrationnumber")]
         public string RegistrationNumber { get; set; }
 
+        [DisplayName("Time of arrival")]
         public DateTime TimeOfArrival { get; set; }
 
         [DisplayName("Time of arrival")]
