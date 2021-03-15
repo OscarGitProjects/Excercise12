@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -14,7 +15,10 @@ namespace Excercise12Garage2.Models
     {
         public int Id { get; set; }
 
+        [DisplayName("Vehicle Type")]
         public string VehicleType { get; set; }
+
+        [DisplayName("Registration Number")]
         public string RegistrationNumber { get; set; }
 
         [Required(ErrorMessage = "Please insert a valid color")]
@@ -28,6 +32,7 @@ namespace Excercise12Garage2.Models
         public string Model { get; set; }
 
         [Range(0, 1000, ErrorMessage = "Cannot select less than one")]
+        [DisplayName("Number of Wheels")]
         public int NumberOfWheels { get; set; }
         public DateTime CheckIn { get; set; }
 

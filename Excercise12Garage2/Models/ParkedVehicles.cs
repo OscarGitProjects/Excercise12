@@ -11,10 +11,10 @@ namespace Excercise12Garage2.Models
     {
             public int Id { get; set; }
 
-            [DisplayName("Type of vehicle")]
+            [DisplayName("Type of Vehicle")]
             public string VehicleType { get; set; }
 
-            [DisplayName("Registrationnumber")]
+            [DisplayName("Registration Number")]
             public string RegistrationNumber { get; set; }
 
             [Required(ErrorMessage = "Please insert a valid color")]
@@ -29,11 +29,11 @@ namespace Excercise12Garage2.Models
             [DisplayFormat(NullDisplayText = "Undefined")]
             [DisplayName("Model")]
             public string Model { get; set; }
-            [DisplayName("Number of wheels")]
+            [DisplayName("Number of Wheels")]
 
             [Range(0,1000,ErrorMessage ="Cannot select less than one")]
             public int NumberOfWheels { get; set; }
-            [DisplayName("Time of arrival")]
+            [DisplayName("Time of Arrival")]
             public DateTime CheckIn { get; set; }
 
             [NotMapped]
