@@ -41,6 +41,11 @@ namespace Excercise12Garage2.Controllers
             // need to create a ViewModel to return view. bla bla
         }
 
+        public IActionResult Contact()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
