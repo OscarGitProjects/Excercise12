@@ -9,16 +9,16 @@ namespace Excercise12Garage2.Models.ViewModels
     {
         public int Id { get; set; }
 
-        [DisplayName("Type of vehicle")]
+        [DisplayName("Type of Vehicle")]
         public string Type { get; set; }
 
-        [DisplayName("Registration number")]
+        [DisplayName("Registration Number")]
         public string RegistrationNumber { get; set; }
 
         [DisplayName("Time of arrival")]
         public DateTime TimeOfArrival { get; set; }
 
-        [DisplayName("Time of arrival")]
+        [DisplayName("Time of Arrival")]
         public string TimeOfArrivalAsString
         {
             get
@@ -27,7 +27,7 @@ namespace Excercise12Garage2.Models.ViewModels
             }
         }
 
-        [DisplayName("Parked time")]
+        [DisplayName("Parked Time")]
         public string ParkedTime 
         {
             get

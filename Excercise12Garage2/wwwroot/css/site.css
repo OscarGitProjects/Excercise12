@@ -72,6 +72,8 @@ body {
     margin-bottom: 60px;
     background-color: black;
     background-image: url(../traffic.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
     color: lightgray;
 }
 

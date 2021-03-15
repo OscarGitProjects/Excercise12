@@ -45,14 +45,14 @@
                 <span asp-validation-for="NumberOfWheels" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Park vehicle" class="btn btn-primary" />
+                <input type="submit" value="Park vehicle" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Park Your Vehicle"  />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a class="btn btn-secondary" asp-action="Index">Back to List</a>
+    <a class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom" title="Garage"  asp-action="Index">Back to Garage</a>
 </div>
 
 @section Scripts {
