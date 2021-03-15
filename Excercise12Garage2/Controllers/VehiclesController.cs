@@ -276,6 +276,32 @@ namespace Excercise12Garage2.Controllers
             return bExist;
         }
 
+        //[AcceptVerbs("GET", "POST")]
+        public JsonResult IfRegistrationNumberNotExist(string RegistrationNumber, int Id = -1)
+        {
+            bool bNotExist = true;
+
+            if (!String.IsNullOrWhiteSpace(RegistrationNumber))
+            {
+                RegistrationNumber = RegistrationNumber.Trim();
+                RegistrationNumber = RegistrationNumber.ToLower();
+                var vehicle = _dbGarage.Vehicle.AsNoTracking().Where(r => r.RegistrationNumber.ToLower().Equals(RegistrationNumber)).FirstOrDefault();
+
+                if (Id < 0)
+                {
+                    if (vehicle != null)
+                        bNotExist = false;
+                }
+                else
+                {
+                    if (vehicle != null && vehicle.Id == Id)
+                        bNotExist = true;
+                }
+            }
+
+            return Json(bNotExist);
+        }
+
         //List of Vehicle Types for Dropdown in Park
         private  IEnumerable<string> GetVehicleTypes()
         {
@@ -316,11 +342,26 @@ namespace Excercise12Garage2.Controllers
                 return NotFound();
             }
 
-            var vehicle = await _dbGarage.Vehicle.FindAsync(id);
+            var vehicle = await _dbGarage.Vehicle.Select(v => new VehicleEditViewModel
+            {
+                CheckIn = v.CheckIn,
+                Id = v.Id,
+                Color = v.Color,
+                Make = v.Make,
+                Model = v.Model,
+                NumberOfWheels = v.NumberOfWheels,
+                RegistrationNumber = v.RegistrationNumber,
+                VehicleType = v.VehicleType
+            })
+            .FirstOrDefaultAsync(i => i.Id == id);
+            
+
             if (vehicle == null)
             {
                 return NotFound();
             }
+
+            // VehicleEditViewModel
             return View(vehicle);
         }
 
@@ -329,25 +370,36 @@ namespace Excercise12Garage2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int Id, [Bind("Id,VehicleType,RegistrationNumber,Color,Make,Model,NumberOfWheels")] ParkedVehicle vehicle)
+        public async Task<IActionResult> Edit(int Id, [Bind("Id,VehicleType,RegistrationNumber,Color,Make,Model,NumberOfWheels")] VehicleEditViewModel upDatedVehicle)
         {
-            if (Id != vehicle.Id)
+            if (Id != upDatedVehicle.Id)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
-                bool bRegistrationNumberExist = CheckIfRegistrationNumberExist(vehicle.RegistrationNumber, vehicle.Id);
+                bool bRegistrationNumberExist = CheckIfRegistrationNumberExist(upDatedVehicle.RegistrationNumber, upDatedVehicle.Id);
 
                 if (bRegistrationNumberExist)
                 {
-                    ModelState.AddModelError("Registrationnumber", "Registrationnumber already exist");
+                    ModelState.AddModelError("Registrationnumber", "Registration number already exist");
                 }
                 else
                 {
                     try
                     {
+                        // Update Vehicle
+                        ParkedVehicle vehicle = new ParkedVehicle();
+                        vehicle.Id = upDatedVehicle.Id;
+                        vehicle.VehicleType = upDatedVehicle.VehicleType;
+                        vehicle.RegistrationNumber = upDatedVehicle.RegistrationNumber;
+                        vehicle.Color = upDatedVehicle.Color;
+                        vehicle.Make = upDatedVehicle.Make;
+                        vehicle.Model = upDatedVehicle.Model;
+                        vehicle.NumberOfWheels = upDatedVehicle.NumberOfWheels;
+                        //vehicle.CheckIn = DateTime.Now;
+
                         _dbGarage.Vehicle.Attach(vehicle).State = EntityState.Modified;
                         _dbGarage.Entry(vehicle).Property(c => c.CheckIn).IsModified = false;
                         await _dbGarage.SaveChangesAsync();
@@ -356,7 +408,7 @@ namespace Excercise12Garage2.Controllers
                     }
                     catch (DbUpdateConcurrencyException)
                     {
-                        if (!VehicleExists(vehicle.Id))
+                        if (!VehicleExists(upDatedVehicle.Id))
                         {
                             return NotFound();
                         }
@@ -369,7 +421,7 @@ namespace Excercise12Garage2.Controllers
                     return RedirectToAction(nameof(Index));
                 }
             }
-            return View(vehicle);
+            return View(upDatedVehicle);
         }
 
         // GET: Vehicles/Delete/5

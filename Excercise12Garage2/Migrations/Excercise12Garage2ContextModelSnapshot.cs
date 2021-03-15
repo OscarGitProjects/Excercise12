@@ -84,7 +84,7 @@ namespace Excercise12Garage2.Migrations
                         new
                         {
                             Id = 1,
-                            CheckIn = new DateTime(2021, 2, 24, 16, 26, 15, 983, DateTimeKind.Local).AddTicks(9772),
+                            CheckIn = new DateTime(2021, 2, 27, 9, 49, 50, 889, DateTimeKind.Local).AddTicks(9278),
                             Color = "Blue",
                             Make = "Koenigsegg",
                             Model = "CCR",
@@ -95,7 +95,7 @@ namespace Excercise12Garage2.Migrations
                         new
                         {
                             Id = 2,
-                            CheckIn = new DateTime(2021, 2, 7, 16, 26, 15, 993, DateTimeKind.Local).AddTicks(2089),
+                            CheckIn = new DateTime(2021, 2, 10, 9, 49, 50, 896, DateTimeKind.Local).AddTicks(8050),
                             Color = "silver",
                             Make = "Scania AB",
                             Model = "2017 Scania R Series",
@@ -106,7 +106,7 @@ namespace Excercise12Garage2.Migrations
                         new
                         {
                             Id = 3,
-                            CheckIn = new DateTime(2021, 2, 20, 16, 26, 15, 993, DateTimeKind.Local).AddTicks(2191),
+                            CheckIn = new DateTime(2021, 2, 23, 9, 49, 50, 896, DateTimeKind.Local).AddTicks(8133),
                             Color = "Green",
                             Make = "Volvo",
                             Model = "2018 D Series",
@@ -117,7 +117,7 @@ namespace Excercise12Garage2.Migrations
                         new
                         {
                             Id = 4,
-                            CheckIn = new DateTime(2021, 3, 7, 16, 26, 15, 993, DateTimeKind.Local).AddTicks(2211),
+                            CheckIn = new DateTime(2021, 3, 10, 9, 49, 50, 896, DateTimeKind.Local).AddTicks(8152),
                             Color = "Black",
                             Make = "SAAB",
                             Model = "Saab 9000",
@@ -128,7 +128,7 @@ namespace Excercise12Garage2.Migrations
                         new
                         {
                             Id = 5,
-                            CheckIn = new DateTime(2021, 3, 8, 16, 26, 15, 993, DateTimeKind.Local).AddTicks(2235),
+                            CheckIn = new DateTime(2021, 3, 11, 9, 49, 50, 896, DateTimeKind.Local).AddTicks(8167),
                             Color = "Ash",
                             Make = "Husqvarna",
                             Model = "Husqvarna 2020",
@@ -139,7 +139,7 @@ namespace Excercise12Garage2.Migrations
                         new
                         {
                             Id = 6,
-                            CheckIn = new DateTime(2021, 3, 5, 16, 26, 15, 993, DateTimeKind.Local).AddTicks(2260),
+                            CheckIn = new DateTime(2021, 3, 8, 9, 49, 50, 896, DateTimeKind.Local).AddTicks(8187),
                             Color = "White",
                             Make = "SSPA Sweden AB",
                             Model = "SSPA 2019",
@@ -150,7 +150,7 @@ namespace Excercise12Garage2.Migrations
                         new
                         {
                             Id = 7,
-                            CheckIn = new DateTime(2021, 3, 1, 16, 26, 15, 993, DateTimeKind.Local).AddTicks(2279),
+                            CheckIn = new DateTime(2021, 3, 4, 9, 49, 50, 896, DateTimeKind.Local).AddTicks(8201),
                             Color = "Yellow",
                             Make = "SAS",
                             Model = "Airbus A330",

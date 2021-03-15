@@ -10,7 +10,7 @@ namespace Excercise12Garage2.Models.ViewModels
     {
         public int Id { get; set; }
 
-        [DisplayName("Registrationnumber")]
+        [DisplayName("Registration number")]
         public string RegistrationNumber{ get; set; }
 
         [DisplayName("Type of vehicle")]
