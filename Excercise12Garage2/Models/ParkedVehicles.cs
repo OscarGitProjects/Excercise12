@@ -14,7 +14,7 @@ namespace Excercise12Garage2.Models
             [DisplayName("Type of vehicle")]
             public string VehicleType { get; set; }
 
-            [DisplayName("Registrationnumber")]
+            [DisplayName("Registration number")]
             public string RegistrationNumber { get; set; }
 
             [Required(ErrorMessage = "Please insert a valid color")]

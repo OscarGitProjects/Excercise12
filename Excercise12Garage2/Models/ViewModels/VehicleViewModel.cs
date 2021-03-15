@@ -12,7 +12,7 @@ namespace Excercise12Garage2.Models.ViewModels
         [DisplayName("Type of vehicle")]
         public string Type { get; set; }
 
-        [DisplayName("Registrationnumber")]
+        [DisplayName("Registration number")]
         public string RegistrationNumber { get; set; }
 
         [DisplayName("Time of arrival")]

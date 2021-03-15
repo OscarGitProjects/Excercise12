@@ -19,8 +19,9 @@ namespace Excercise12Garage2.Models
         [DisplayName("Type of vehicle")]
         public string VehicleType { get; set; }
 
-        [DisplayName("Registrationnumber")]
-        [Required(ErrorMessage = "Please insert a valid registrationnumber")]        
+        [DisplayName("Registration number")]
+        [Required(ErrorMessage = "Please insert a valid registration number")]  
+        [Remote(action: "IfRegistrationNumberNotExist", controller: "Vehicles", AdditionalFields = nameof(Id), ErrorMessage ="Registrationnumber already exist")]
         public string RegistrationNumber { get; set; }
 
         [DisplayName("Color")]
