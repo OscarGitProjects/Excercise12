@@ -19,7 +19,7 @@
             <div class="card-body">
                 <h5 class="card-title">Park Your Car With Us!</h5>
                 <p class="card-text">We offer a secure, monitored location in Central Stockholm for your vehicle.</p>
-                <a class="btn btn-primary" asp-area="" asp-controller="Vehicles" asp-action="Garage">Search For Your Vehicle</a>
+                <a class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Search in the Garage" asp-area="" asp-controller="Vehicles" asp-action="Garage">Search For Your Vehicle</a>
             </div>
         </div>
     </div>
@@ -27,8 +27,9 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Current Rate</h5>
-                <p class="card-text"><h5>180</h5> <span class="text-muted">kr/hr</span> </p>
-                <a class="btn btn-primary" asp-area="" asp-controller="Vehicles" asp-action="Park">Park Your Vehicle</a>
+                <p class="card-text font-weight-bold">180 <span class="text-muted">kr/hr</span></p>
+                <br/>
+                <a class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Park Your Vehicle!" asp-area="" asp-controller="Vehicles" asp-action="Park">Park Your Vehicle</a>
             </div>
         </div>
     </div>

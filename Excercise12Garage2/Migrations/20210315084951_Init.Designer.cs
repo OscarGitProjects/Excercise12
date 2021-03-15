@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Excercise12Garage2.Migrations
 {
     [DbContext(typeof(Excercise12Garage2Context))]
-    [Migration("20210312143823_Seed Garage")]
-    partial class SeedGarage
+    [Migration("20210315084951_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -86,7 +86,7 @@ namespace Excercise12Garage2.Migrations
                         new
                         {
                             Id = 1,
-                            CheckIn = new DateTime(2021, 2, 24, 15, 38, 22, 353, DateTimeKind.Local).AddTicks(332),
+                            CheckIn = new DateTime(2021, 2, 27, 9, 49, 50, 889, DateTimeKind.Local).AddTicks(9278),
                             Color = "Blue",
                             Make = "Koenigsegg",
                             Model = "CCR",
@@ -97,7 +97,7 @@ namespace Excercise12Garage2.Migrations
                         new
                         {
                             Id = 2,
-                            CheckIn = new DateTime(2021, 2, 7, 15, 38, 22, 358, DateTimeKind.Local).AddTicks(7429),
+                            CheckIn = new DateTime(2021, 2, 10, 9, 49, 50, 896, DateTimeKind.Local).AddTicks(8050),
                             Color = "silver",
                             Make = "Scania AB",
                             Model = "2017 Scania R Series",
@@ -108,7 +108,7 @@ namespace Excercise12Garage2.Migrations
                         new
                         {
                             Id = 3,
-                            CheckIn = new DateTime(2021, 2, 20, 15, 38, 22, 358, DateTimeKind.Local).AddTicks(7522),
+                            CheckIn = new DateTime(2021, 2, 23, 9, 49, 50, 896, DateTimeKind.Local).AddTicks(8133),
                             Color = "Green",
                             Make = "Volvo",
                             Model = "2018 D Series",
@@ -119,7 +119,7 @@ namespace Excercise12Garage2.Migrations
                         new
                         {
                             Id = 4,
-                            CheckIn = new DateTime(2021, 3, 7, 15, 38, 22, 358, DateTimeKind.Local).AddTicks(7649),
+                            CheckIn = new DateTime(2021, 3, 10, 9, 49, 50, 896, DateTimeKind.Local).AddTicks(8152),
                             Color = "Black",
                             Make = "SAAB",
                             Model = "Saab 9000",
@@ -130,7 +130,7 @@ namespace Excercise12Garage2.Migrations
                         new
                         {
                             Id = 5,
-                            CheckIn = new DateTime(2021, 3, 8, 15, 38, 22, 358, DateTimeKind.Local).AddTicks(7669),
+                            CheckIn = new DateTime(2021, 3, 11, 9, 49, 50, 896, DateTimeKind.Local).AddTicks(8167),
                             Color = "Ash",
                             Make = "Husqvarna",
                             Model = "Husqvarna 2020",
@@ -141,7 +141,7 @@ namespace Excercise12Garage2.Migrations
                         new
                         {
                             Id = 6,
-                            CheckIn = new DateTime(2021, 3, 5, 15, 38, 22, 358, DateTimeKind.Local).AddTicks(7683),
+                            CheckIn = new DateTime(2021, 3, 8, 9, 49, 50, 896, DateTimeKind.Local).AddTicks(8187),
                             Color = "White",
                             Make = "SSPA Sweden AB",
                             Model = "SSPA 2019",
@@ -152,7 +152,7 @@ namespace Excercise12Garage2.Migrations
                         new
                         {
                             Id = 7,
-                            CheckIn = new DateTime(2021, 3, 1, 15, 38, 22, 358, DateTimeKind.Local).AddTicks(7698),
+                            CheckIn = new DateTime(2021, 3, 4, 9, 49, 50, 896, DateTimeKind.Local).AddTicks(8201),
                             Color = "Yellow",
                             Make = "SAS",
                             Model = "Airbus A330",
@@ -168,6 +168,9 @@ namespace Excercise12Garage2.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("GarageGaregeId")
+                        .HasColumnType("int");
 
                     b.Property<int>("Id")
                         .HasColumnType("int");
@@ -186,6 +189,8 @@ namespace Excercise12Garage2.Migrations
 
                     b.HasKey("ParkingPlaceId");
 
+                    b.HasIndex("GarageGaregeId");
+
                     b.HasIndex("VehicleId");
 
                     b.ToTable("VehicleParkingPlace");
@@ -193,11 +198,20 @@ namespace Excercise12Garage2.Migrations
 
             modelBuilder.Entity("Excercise12Garage2.Models.VehicleParkingPlace", b =>
                 {
+                    b.HasOne("Excercise12Garage2.Models.Garage", null)
+                        .WithMany("VehicleParkingPlace")
+                        .HasForeignKey("GarageGaregeId");
+
                     b.HasOne("Excercise12Garage2.Models.ParkedVehicle", "Vehicle")
                         .WithMany()
                         .HasForeignKey("VehicleId");
 
                     b.Navigation("Vehicle");
+                });
+
+            modelBuilder.Entity("Excercise12Garage2.Models.Garage", b =>
+                {
+                    b.Navigation("VehicleParkingPlace");
                 });
 #pragma warning restore 612, 618
         }

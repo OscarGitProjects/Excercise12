@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,25 +16,35 @@ namespace Excercise12Garage2.Models
     {
         public int Id { get; set; }
 
-        [DisplayName("Vehicle Type")]
+        [DisplayName("Type of vehicle")]
         public string VehicleType { get; set; }
 
-        [DisplayName("Registration Number")]
+        [DisplayName("Registration number")]
+        [Required(ErrorMessage = "Please insert a valid registration number")]  
+        [Remote(action: "IfRegistrationNumberNotExist", controller: "Vehicles", AdditionalFields = nameof(Id), ErrorMessage ="Registrationnumber already exist")]
         public string RegistrationNumber { get; set; }
 
+        [DisplayName("Color")]
         [Required(ErrorMessage = "Please insert a valid color")]
         [StringLength(20)]
         [DisplayFormat(NullDisplayText = "Undefined")]
         public string Color { get; set; }
+
+        [DisplayName("Vehicle manufacture")]
+        [Required(ErrorMessage = "Please insert a vehicle manufacture")]
         public string Make { get; set; }
 
+        [DisplayName("Vehicle model")]
+        [Required(ErrorMessage = "Please insert a vehicle model")]
         [StringLength(20)]
         [DisplayFormat(NullDisplayText = "Undefined")]
         public string Model { get; set; }
 
+        [DisplayName("Number of wheels")]
         [Range(0, 1000, ErrorMessage = "Cannot select less than one")]
         [DisplayName("Number of Wheels")]
         public int NumberOfWheels { get; set; }
+
         public DateTime CheckIn { get; set; }
 
         [NotMapped]
