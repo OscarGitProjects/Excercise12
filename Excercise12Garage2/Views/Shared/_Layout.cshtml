@@ -12,7 +12,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-secondary border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Excercise12Garage2</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">G3 Garage</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -20,19 +20,22 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-light btn btn-outline-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-light btn btn-outline-light" asp-area="" asp-controller="Home" asp-action="Index" data-toggle="tooltip" data-placement="bottom" title="Home">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light btn btn-outline-light" asp-area="" asp-controller="Vehicles" asp-action="Index">View Garage</a>
+                            <a class="nav-link text-light btn btn-outline-light" asp-area="" asp-controller="Vehicles" asp-action="Index" data-toggle="tooltip" data-placement="bottom" title="View the garage">View Garage</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light btn btn-outline-light" asp-area="" asp-controller="Vehicles" asp-action="Garage">Search Garage</a>
+                            <a class="nav-link text-light btn btn-outline-light" asp-area="" asp-controller="Vehicles" asp-action="Garage" data-toggle="tooltip" data-placement="bottom" title="Search the Garage">Search Garage</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light btn btn-outline-light" asp-area="" asp-controller="Vehicles" asp-action="Statistics">Statistics</a>
+                            <a class="nav-link text-light btn btn-outline-light" asp-area="" asp-controller="Vehicles" asp-action="Statistics" data-toggle="tooltip" data-placement="bottom" title="Statistics">Statistics</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light btn btn-outline-light" asp-area="" asp-controller="Home" asp-action="About">About</a>
+                            <a class="nav-link text-light btn btn-outline-light" asp-area="" asp-controller="Home" asp-action="About" data-toggle="tooltip" data-placement="bottom" title="About">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light btn btn-outline-light" asp-area="" asp-controller="Home" asp-action="Contact" data-toggle="tooltip" data-placement="bottom" title="Contact">Contact</a>
                         </li>
                     </ul>
                 </div>
@@ -53,13 +56,9 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-
-    <script>
-        $(function () {
+    <script>$(function () {
             $('[data-toggle="tooltip"]').tooltip()
-        })
-    </script>
-
+        })</script>
     @await RenderSectionAsync("Scripts", required: false)
 
 </body>
