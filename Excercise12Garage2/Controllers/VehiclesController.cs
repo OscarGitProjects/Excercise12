@@ -131,7 +131,6 @@ namespace Excercise12Garage2.Controllers
             // Sort list with vehicle
             lsVehicles = VehicleHelper.Sort(lsVehicles, oldSortBy, sortOrder);
 
-
             // Set ViewBags
             ViewBag.SortOrder = sortOrder;
             ViewBag.OldSortBy = oldSortBy;
@@ -161,10 +160,14 @@ namespace Excercise12Garage2.Controllers
                     })
                     .ToList<VehicleViewModel>();
 
-
             // Sort list with vehicle
             lsVehicles = VehicleHelper.Sort(lsVehicles, sortBy, sortOrder);
 
+            // Now set up sortOrder for next postback
+            if (sortOrder.Equals("desc"))
+                sortOrder = "asc";
+            else
+                sortOrder = "desc";
 
             // Set ViewBags
             ViewBag.SortOrder = sortOrder;
@@ -224,7 +227,29 @@ namespace Excercise12Garage2.Controllers
             var vTypes = GetVehicleTypes();
             var model = new VehicleEditViewModel();
             model.VehicleTypes = GetVehicleTypeOptions(vTypes);
+            model.IsGarageFull = IsGarageFull();
             return View(model);
+        }
+
+        /// <summary>
+        /// Method check i garage is full or not
+        /// </summary>
+        /// <returns>true if garage is full. Else false</returns>
+        private bool IsGarageFull()
+        {
+            bool bFull = false;
+            int iNumberOfFreeParkingPlaces = 0;
+
+            // Hämta antal fordon i garaget
+            int numberOfVehicles = _dbGarage.Vehicle.Count();
+
+            // Hämta garaget
+            var garage = _dbGarage.Garage.FirstOrDefault();
+            if(garage != null)
+                iNumberOfFreeParkingPlaces = garage.NumberOfParkingPlaces - numberOfVehicles;
+
+            bFull = iNumberOfFreeParkingPlaces <= 0 ? true : false;
+            return bFull;
         }
 
         

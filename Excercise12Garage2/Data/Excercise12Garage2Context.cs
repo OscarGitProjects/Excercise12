@@ -27,7 +27,7 @@ namespace Excercise12Garage2.Data
                 {
                     GaregeId = 1,
                     Name = "Group 3. Garage",
-                    NumberOfParkingPlaces = 0
+                    NumberOfParkingPlaces = 10
                 });
 
             modelBuilder.Entity<ParkedVehicle>().HasData(

@@ -22,7 +22,7 @@ namespace Excercise12Garage2.Models
 
         [DisplayName("Registration number")]
         [Required(ErrorMessage = "Please insert a valid registration number")]  
-        [Remote(action: "IfRegistrationNumberNotExist", controller: "Vehicles", AdditionalFields = nameof(Id), ErrorMessage ="Registrationnumber already exist")]
+        [Remote(action: "IfRegistrationNumberNotExist", controller: "Vehicles", AdditionalFields = nameof(Id), ErrorMessage ="Registration number already exist")]
         public string RegistrationNumber { get; set; }
 
         [DisplayName("Color")]
@@ -49,6 +49,9 @@ namespace Excercise12Garage2.Models
 
         [NotMapped]
         public IEnumerable<SelectListItem> VehicleTypes { get; set; }
+
+        [NotMapped]
+        public bool IsGarageFull { get; set; }
 
     }
 }
