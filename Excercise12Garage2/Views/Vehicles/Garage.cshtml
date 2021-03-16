@@ -17,7 +17,7 @@
         <div class="col-md-6">
             <div class="input-group">
                 <input type="text" class="form-control" id="txtSearchRegistrationNumber" name="txtSearchRegistrationNumber" placeholder="Search for Registrationnumber" value="@ViewBag.SearchFor" />
-                <button class="btn btn-secondary" id="search" type="submit" data-toggle="tooltip" data-placement="right" title="Search for Vehicle" >Search</button>
+                <button class="btn btn-secondary" id="search" type="submit" data-toggle="tooltip" data-placement="bottom" title="Search for Vehicle" >Search</button>
             </div>
         </div>
     </div>
@@ -67,8 +67,8 @@
                     @Html.DisplayFor(modelItem => item.ParkedTime)
                 </td>
                 <td>
-                    <a class="btn btn-secondary btn-sm" data-toggle="tooltip" data-placement="top" title="Edit Your Vehicle"  asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                    <a class="btn btn-secondary btn-sm" data-toggle="tooltip" data-placement="top" title="View Vehicle Details"  asp-action="Details" asp-route-id="@item.Id">Details</a>
+                    <a class="btn btn-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Edit Your Vehicle"  asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    <a class="btn btn-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="View Vehicle Details"  asp-action="Details" asp-route-id="@item.Id">Details</a>
                     <a class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="bottom" title="Leave the Garage"  asp-action="Remove" asp-route-id="@item.Id">Leave</a>
                 </td>
             </tr>
@@ -86,5 +86,5 @@ else
 <hr />
 
 <div>
-    <a class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Garage"  asp-action="Index">Back to Garage</a>
+    <a class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom" title="Garage"  asp-action="Index">Back to Garage</a>
 </div>
