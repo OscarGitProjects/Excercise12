@@ -21,7 +21,13 @@ namespace Excercise12Garage2.Controllers
             _dbGarage = context;
         }
 
-
+        /// <summary>
+        /// Sort List Results by Order
+        /// </summary>
+        /// <param name="sortBy"></param>
+        /// <param name="sortOrder"></param>
+        /// <param name="txtSearchRegistrationNumber"></param>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult Sort(string sortBy, string sortOrder, string txtSearchRegistrationNumber)
         {
@@ -76,7 +82,13 @@ namespace Excercise12Garage2.Controllers
             return View("Garage", lsVehicles);
         }
 
-
+        /// <summary>
+        /// Search for Vehicle in Database
+        /// </summary>
+        /// <param name="sortOrder"></param>
+        /// <param name="oldSortBy"></param>
+        /// <param name="txtSearchRegistrationNumber"></param>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult SearchFor(string sortOrder, string oldSortBy, string txtSearchRegistrationNumber)
         {
@@ -129,6 +141,10 @@ namespace Excercise12Garage2.Controllers
 
 
         // GET: VehicleController
+        /// <summary>
+        /// Returns View of Garage
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Garage()
         {
             string sortOrder = "asc";
@@ -160,7 +176,10 @@ namespace Excercise12Garage2.Controllers
 
 
         // GET: Vehicles
-        // Index Page listing all Vehicles in Garage
+        /// <summary>
+        /// Index Page listing all Vehicles in Garage
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> Index()
         {
             var messageObject = TempData["message"];
@@ -173,7 +192,11 @@ namespace Excercise12Garage2.Controllers
         }
 
         // GET: Vehicles/Details/5
-        // Details Page for Vehicle Parked in Garage
+        /// <summary>
+        ///  Details Page for Vehicle Parked in Garage
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -192,6 +215,10 @@ namespace Excercise12Garage2.Controllers
         }
 
         // GET: Vehicles/Park new vehicle
+        /// <summary>
+        /// Brings up Park View
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Park()
         {
             var vTypes = GetVehicleTypes();
@@ -202,7 +229,11 @@ namespace Excercise12Garage2.Controllers
 
         
         // POST: Vehicles/Parks new vehicle
-        
+        /// <summary>
+        /// Parks a new vehicle in database
+        /// </summary>
+        /// <param name="newVehicle"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Park([Bind("VehicleType,RegistrationNumber,Color,Make,Model,NumberOfWheels")] VehicleEditViewModel newVehicle)
@@ -302,8 +333,11 @@ namespace Excercise12Garage2.Controllers
             return Json(bNotExist);
         }
 
-        //List of Vehicle Types for Dropdown in Park
-        private  IEnumerable<string> GetVehicleTypes()
+        /// <summary>
+        /// List of Vehicle Types for Dropdown in Park
+        /// </summary>
+        /// <returns></returns>
+        private IEnumerable<string> GetVehicleTypes()
         {
              
             return new List<string> 
@@ -317,8 +351,12 @@ namespace Excercise12Garage2.Controllers
                 "Sportscar",
             };
         }
-        
-        //Creates Enumerable List for Dropdown
+
+        /// <summary>
+        /// Creates Enumerable List for Dropdown
+        /// </summary>
+        /// <param name="elements"></param>
+        /// <returns></returns>
         private IEnumerable<SelectListItem> GetVehicleTypeOptions(IEnumerable<string> elements)
         {
             var typeList = new List<SelectListItem>();
@@ -335,7 +373,12 @@ namespace Excercise12Garage2.Controllers
 
        
         // GET: Vehicles/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        /// <summary>
+        /// Edit Vehicle in Database
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<IActionResult> Edit(int? id)//TODO Validate Vehicle Type
         {
             if (id == null)
             {
@@ -366,8 +409,12 @@ namespace Excercise12Garage2.Controllers
         }
 
         // POST: Vehicles/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Posts Edited Vehicle to Database
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <param name="upDatedVehicle"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int Id, [Bind("Id,VehicleType,RegistrationNumber,Color,Make,Model,NumberOfWheels")] VehicleEditViewModel upDatedVehicle)
@@ -425,7 +472,11 @@ namespace Excercise12Garage2.Controllers
         }
 
         // GET: Vehicles/Delete/5
-        //Take Vehicle out of Garage
+        /// <summary>
+        /// Removes Vehicle from Database
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Remove(int? id)
         {
             if (id == null)
@@ -445,7 +496,10 @@ namespace Excercise12Garage2.Controllers
 
 
         // GET: Vehicles/Statistics/5
-        //Statisctics
+        /// <summary>
+        /// Displays Statistics of Garage
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> Statistics()
         {
             VehicleStatisticsViewModel viewModel = new VehicleStatisticsViewModel();
@@ -488,8 +542,12 @@ namespace Excercise12Garage2.Controllers
         }
 
         // POST: Vehicles/Delete/5
-        // Confirm Vehicle out of Garage 
         //TODO, add link to Receipt Page
+        /// <summary>
+        /// Confirm Vehicle out of Garage 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost, ActionName("Remove")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> RemoveConfirmed(int id)

@@ -17,6 +17,7 @@ namespace Excercise12Garage2.Models
         public int Id { get; set; }
 
         [DisplayName("Type of vehicle")]
+        [Required(ErrorMessage ="Please insert a valid Vehicle Type")]
         public string VehicleType { get; set; }
 
         [DisplayName("Registration number")]
