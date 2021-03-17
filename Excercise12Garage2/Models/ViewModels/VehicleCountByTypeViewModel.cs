@@ -7,6 +7,7 @@ namespace Excercise12Garage2.Models.ViewModels
     {
         [DisplayFormat(NullDisplayText = "Undefined")]
         [DisplayName("Type of vehicle")]
+        [DisplayFormat(NullDisplayText = "Undefined")]
         public string VehicleTyp { get; set; }
 
         [DisplayName("Number of vehicles")]

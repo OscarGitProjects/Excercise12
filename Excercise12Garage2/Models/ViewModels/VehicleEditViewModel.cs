@@ -17,6 +17,7 @@ namespace Excercise12Garage2.Models
         public int Id { get; set; }
 
         [DisplayName("Type of vehicle")]
+        [Required(ErrorMessage = "You have to select a type of vehicle")]
         public string VehicleType { get; set; }
 
         [DisplayName("Registration number")]
