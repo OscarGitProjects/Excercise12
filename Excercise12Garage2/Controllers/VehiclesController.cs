@@ -348,11 +348,13 @@ namespace Excercise12Garage2.Controllers
             var typeList = new List<SelectListItem>();
             foreach(var element in elements)
             {
+                bool IsNullOrWhiteSpace = String.IsNullOrWhiteSpace(selectedValue);
+
                 typeList.Add(new SelectListItem
                 {
                     Value = element,
                     Text = element,
-                    Selected = (!String.IsNullOrWhiteSpace(selectedValue) && element.Equals(selectedValue)) ? true : false
+                    Selected = (!IsNullOrWhiteSpace && element.Equals(selectedValue)) ? true : false
                 });
             }
             return typeList;
