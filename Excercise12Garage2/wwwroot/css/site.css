@@ -7,8 +7,14 @@ a.navbar-brand {
   word-break: break-all;
 }
 
-/*Logo Information*/
 
+/*Print Information*/
+#btnPrint {
+    display: none;
+}
+
+
+/*Logo Information*/
 .headerlogo {
     float: left;
     margin-right: 10px;

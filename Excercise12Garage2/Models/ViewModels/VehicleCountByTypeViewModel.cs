@@ -1,9 +1,11 @@
 ﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Excercise12Garage2.Models.ViewModels
 {
     public class VehicleCountByTypeViewModel
     {
+        [DisplayFormat(NullDisplayText = "Undefined")]
         [DisplayName("Type of vehicle")]
         public string VehicleTyp { get; set; }
 
