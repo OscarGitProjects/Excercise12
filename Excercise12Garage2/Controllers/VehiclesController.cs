@@ -263,7 +263,6 @@ namespace Excercise12Garage2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Park([Bind("VehicleType,RegistrationNumber,Color,Make,Model,NumberOfWheels")] VehicleEditViewModel newVehicle)
         {          
-
             if (ModelState.IsValid)
             {
                 bool bRegistrationNumberExist = CheckIfRegistrationNumberExist(newVehicle.RegistrationNumber);
@@ -376,13 +375,9 @@ namespace Excercise12Garage2.Controllers
                 "Sportscar",
             };
         }
-
-        /// <summary>
-        /// Creates Enumerable List for Dropdown
-        /// </summary>
-        /// <param name="elements"></param>
-        /// <returns></returns>
-        private IEnumerable<SelectListItem> GetVehicleTypeOptions(IEnumerable<string> elements)
+        
+        //Creates Enumerable List for Dropdown
+        private IEnumerable<SelectListItem> GetVehicleTypeOptions(IEnumerable<string> elements, string selectedValue = "")
         {
             var typeList = new List<SelectListItem>();
             foreach(var element in elements)
@@ -390,7 +385,8 @@ namespace Excercise12Garage2.Controllers
                 typeList.Add(new SelectListItem
                 {
                     Value = element,
-                    Text = element
+                    Text = element,
+                    Selected = (!String.IsNullOrWhiteSpace(selectedValue) && element.Equals(selectedValue)) ? true : false
                 });
             }
             return typeList;
@@ -428,6 +424,9 @@ namespace Excercise12Garage2.Controllers
             {
                 return NotFound();
             }
+
+            var vTypes = GetVehicleTypes();
+            vehicle.VehicleTypes = GetVehicleTypeOptions(vTypes, vehicle.VehicleType);
 
             // VehicleEditViewModel
             return View(vehicle);
@@ -476,7 +475,7 @@ namespace Excercise12Garage2.Controllers
                         _dbGarage.Entry(vehicle).Property(c => c.CheckIn).IsModified = false;
                         await _dbGarage.SaveChangesAsync();
 
-                        TempData["message"] = "You have updated information for vehicle " + vehicle.RegistrationNumber;
+                        TempData["message"] = "You have updated information about the vehicle " + vehicle.RegistrationNumber;
                     }
                     catch (DbUpdateConcurrencyException)
                     {
