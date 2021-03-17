@@ -234,6 +234,7 @@ namespace Excercise12Garage2.Controllers
         {          
             if (ModelState.IsValid)
             {
+                
                 bool bRegistrationNumberExist = CheckIfRegistrationNumberExist(newVehicle.RegistrationNumber);
 
                 if (bRegistrationNumberExist)

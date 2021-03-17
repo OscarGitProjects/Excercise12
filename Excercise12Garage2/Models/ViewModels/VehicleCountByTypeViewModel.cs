@@ -5,6 +5,7 @@ namespace Excercise12Garage2.Models.ViewModels
 {
     public class VehicleCountByTypeViewModel
     {
+        [DisplayFormat(NullDisplayText = "Undefined")]
         [DisplayName("Type of vehicle")]
         [DisplayFormat(NullDisplayText = "Undefined")]
         public string VehicleTyp { get; set; }
